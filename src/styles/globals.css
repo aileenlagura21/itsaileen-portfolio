@@ -1,0 +1,58 @@
+/* Global utility styles and custom cursor */
+
+/* Global transitions and scroll behavior */
+html {
+  scroll-behavior: smooth;
+  cursor: default;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Plus Jakarta Sans", "Inter", ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #fbb1bd;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #f25c7e;
+}
+
+/* Custom cursor tracker styles - only active when cursor trail is turned on */
+.custom-cursor-dot {
+  width: 8px;
+  height: 8px;
+  background-color: #f25c7e;
+  border-radius: 50%;
+  position: fixed;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 9999;
+  transition: width 0.15s, height 0.15s, background-color 0.15s;
+}
+
+.custom-cursor-ring {
+  width: 32px;
+  height: 32px;
+  border: 1.5px solid rgba(242, 92, 126, 0.5);
+  border-radius: 50%;
+  position: fixed;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 9998;
+  transition: transform 0.08s ease-out, border-color 0.2s, background-color 0.2s;
+}

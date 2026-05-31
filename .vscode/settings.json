@@ -1,0 +1,18 @@
+{
+  "typescript.enablePromptUseWorkspaceTsdk": false,
+  "typescript.tsdk": null,
+  "typescript.disableAutomaticTypeAcquisition": true,
+  "javascript.validate.enable": false,
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": false
+  },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": false
+  },
+  "problems.decorations.enabled": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll": false
+  }
+}

@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+@import './styles/globals.css';
+@import './styles/animations.css';
+
+@theme {
+  --font-sans: "Plus Jakarta Sans", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Space Grotesk", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+
+  /* Premium soft pink & hot pink palette aligned with Frosted Glass rose-500/rose-400 */
+  --color-hotpink: #f43f5e;
+  --color-pastelpink: #ffe5ec;
+  --color-softrose: #fbcfe8;
+  --color-blush: #f472b6;
+  --color-peach: #fff0f3;
+  --color-cherry: #ec4899;
+  --color-cream: #fff0f3;
+  
+  /* Deluxe dark mode tones: plum & rose-charcoal with deep rich background */
+  --color-plum-dark: #0f0507;
+  --color-plum-card: #18090c;
+  --color-plum-border: #331319;
+  --color-plum-accent: #f43f5e;
+  --color-plum-muted: #c9b0b7;
+}
+
+@layer utilities {
+  /* Cute gradient texts */
+  .text-glow-pink {
+    text-shadow: 0 0 12px rgba(242, 92, 126, 0.4);
+  }
+  
+  .bg-glass {
+    backdrop-filter: blur(16px);
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #fbb1bd;
+    border-radius: 9999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #f25c7e;
+  }
+}
