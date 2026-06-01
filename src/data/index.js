@@ -3,9 +3,108 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+/**
+ * @typedef {Object} Project
+ * @property {string} id
+ * @property {string} title
+ * @property {string} subtitle
+ * @property {string} description
+ * @property {string} longDescription
+ * @property {string} image
+ * @property {string} category
+ * @property {string[]} tags
+ * @property {string[]} tools
+ * @property {string} client
+ * @property {string} date
+ * @property {string} liveUrl
+ * @property {string} githubUrl
+ * @property {string} role
+ * @property {string[]} features
+ * @property {string[]} [gallery]
+ * @property {string[]} [galleryTitles]
+ */
+
+/**
+ * @typedef {Object} Service
+ * @property {string} id
+ * @property {string} title
+ * @property {string} description
+ * @property {string} detailedInfo
+ * @property {string} iconName
+ * @property {string} accentColor
+ * @property {string} pastelBg
+ */
+
+/**
+ * @typedef {Object} Skill
+ * @property {string} name
+ * @property {string} category
+ * @property {number} percentage
+ * @property {string} iconName
+ * @property {string} accent
+ */
+
+/**
+ * @typedef {Object} TimelineItem
+ * @property {string} id
+ * @property {string} year
+ * @property {string} period
+ * @property {string} title
+ * @property {string} organization
+ * @property {string} location
+ * @property {string} description
+ * @property {string[]} tags
+ * @property {string} type
+ */
+
+/**
+ * @typedef {Object} Testimonial
+ * @property {string} id
+ * @property {string} name
+ * @property {string} role
+ * @property {string} company
+ * @property {string} text
+ * @property {string} avatarUrl
+ * @property {number} rating
+ */
+
 export const AVATAR_URL = '/src/assets/images/hana_profile_1779523320680.png';
 
 export const PROJECTS = [
+  {
+    id: 'athenaeum-digital',
+    title: 'Athenaeum Digital',
+    subtitle: 'Library Management & Catalog Platform',
+    description: 'An elegant library catalog and circulation system featuring live status monitors, search tools, student tracking, and fine-grain administration controls.',
+    longDescription: 'Athenaeum Digital redefines administrative software through a calm, warm editorial aesthetic. Seamlessly integrating complex state-flows, this platform allows students to check book availability, borrow volumes safely, and track return deadlines. It features a complete control dashboard where library managers can track real-time transactional logs, add or remove catalogue entries, monitor system health, and export critical system metrics instantly.',
+    image: '/src/assets/images/athenaeum_digital_mockup_1780313202452.png',
+    category: 'development',
+    tags: ['Full-Stack', 'Interactive UI', 'State Flow', 'Admin Console'],
+    tools: ['React', 'Express', 'Tailwind CSS', 'Vite', 'TypeScript'],
+    client: 'Bohol Island State University - Bilar Campus',
+    date: 'May 2026',
+    liveUrl: 'https://athenaeum.example.com',
+    githubUrl: 'https://github.com/aileenlagura/athenaeum-digital',
+    role: 'Full-Stack Developer & UI Architect',
+    features: [
+      'Interactive real-time catalog search filtering dynamically by genre, title, author, or ISBN code.',
+      'Two distinct user environments: Student Portal (circulation, active books checklists, reminders) and Administrator Control Console.',
+      'Automated transactional log mechanism tracking borrowings, returns, and real-time live stock countdowns.',
+      'Robust administrative console with manual book addition forms, database health indicators, and CSV metric exports.'
+    ],
+    gallery: [
+      '/src/assets/images/athenaeum_digital_mockup_1780313202452.png',
+      '/src/assets/images/athenaeum_student_catalog_1780313529778.png',
+      '/src/assets/images/athenaeum_borrow_success_1780313549478.png',
+      '/src/assets/images/athenaeum_admin_dashboard_1780313565993.png'
+    ],
+    galleryTitles: [
+      'Administrative Catalog Management Console',
+      'Student Catalog & Personalized Circulation Board',
+      'Interactive Real-time Borrowing Success Flow',
+      'Management Statistics & Book Insertion Dialog'
+    ]
+  },
   {
     id: 'aura-skincare',
     title: 'Aura Skincare',
@@ -26,6 +125,14 @@ export const PROJECTS = [
       'Sleek sliding cart tray using spring-backed physics layout drawers.',
       'Aesthetic editorial grid optimizing fluid high-definition image scaling.',
       'Responsive design perfectly unified across mobile, tablet, and 4K displays.'
+    ],
+    gallery: [
+      '/src/assets/images/project_webux_1779523344332.png',
+      '/src/assets/images/aura_pdp_screenshot_1780314358786.png'
+    ],
+    galleryTitles: [
+      'Aura Skincare Landing Page & Digital Boutique',
+      'Organic Ingredient Showcase & Slider PDP'
     ]
   },
   {
@@ -48,6 +155,14 @@ export const PROJECTS = [
       'Gentle fluid-simulated water log system updating visually as user inputs custom volumes.',
       'Haptic-backed calm circular breathing meter assisting in grounding exercises.',
       'Complete comprehensive design token library with 50+ fully accessible system components.'
+    ],
+    gallery: [
+      '/src/assets/images/project_mobile_1779523362772.png',
+      '/src/assets/images/solis_breathing_app_1780314376942.png'
+    ],
+    galleryTitles: [
+      'Solis Companion Mobile App Key Concept Screens',
+      'Daily Grounding Breath Cycles & Meditation Circle'
     ]
   },
   {
@@ -70,6 +185,14 @@ export const PROJECTS = [
       'Eco-friendly packaging blueprint employing soy ink formulations and tactile linen finishes.',
       'Interactive online dessert selection menu utilizing smooth parallax card transitions.',
       'Curated digital visual identity toolkit with bespoke color guides and font pairings.'
+    ],
+    gallery: [
+      '/src/assets/images/project_brand_1779523386945.png',
+      '/src/assets/images/maison_packaging_specs_1780314392849.png'
+    ],
+    galleryTitles: [
+      'Maison de Rose Brand Guidelines & Palette Asset Specs',
+      'Artisanal Embossed Packaging Layout Blueprints'
     ]
   },
   {
@@ -92,6 +215,14 @@ export const PROJECTS = [
       'Ambient audio canvas using the Web Audio API to mix spatial relaxing noise channels live.',
       'Robust automatic autosaving backup protecting written work across offline states.',
       'Bespoke visual analytics page with charming pink calorie-like graphs charting word density.'
+    ],
+    gallery: [
+      'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&q=80&w=720&h=540',
+      '/src/assets/images/muse_workspace_view_1780314412662.png'
+    ],
+    galleryTitles: [
+      'Quiet Workspace Reading & Creative Environment',
+      'Distraction-Free Editorial Layout & Ambient Selection Bar'
     ]
   },
   {
@@ -114,6 +245,14 @@ export const PROJECTS = [
       'Mouse custom bubble-bursting canvas trail with configurable toggle speed setting.',
       'Bouncy glass cards utilizing advanced backdrop-filter tricks to adapt on gradient backdrops.',
       'Dynamic CSS asset grids allowing layout items to be resized by click drag handlers.'
+    ],
+    gallery: [
+      'https://images.unsplash.com/photo-1522542550221-31fd19575a2d?auto=format&fit=crop&q=80&w=720&h=540',
+      '/src/assets/images/peachy_sticker_canvas_1780314430438.png'
+    ],
+    galleryTitles: [
+      'Creative Frontend Wireframe Conception Screen',
+      'Interactive Gravity Physics Sticker Sandbox & Canvas Mouse Trail'
     ]
   },
   {
@@ -136,6 +275,14 @@ export const PROJECTS = [
       '300+ Figma components supporting advanced variable variants and automatic dark states.',
       'Strict AAA color compliance maintaining rich legible contrast against soft pink screens.',
       'Export support allowing direct implementation with React styled-components, CSS, or Tailwind.'
+    ],
+    gallery: [
+      'https://images.unsplash.com/photo-1513151233558-d860c5398176?auto=format&fit=crop&q=80&w=720&h=540',
+      '/src/assets/images/bloom_design_tokens_1780314448917.png'
+    ],
+    galleryTitles: [
+      'Bloom Abstract Composition & Styling Atmosphere Layout',
+      'Figma Design Tokens & Accessible AAA Component Setups'
     ]
   }
 ];

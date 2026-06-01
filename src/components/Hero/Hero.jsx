@@ -5,7 +5,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
-import { Sparkles, Github, Linkedin, Figma, Dribbble, ArrowDown, ArrowUpRight, MessageSquareQuote } from 'lucide-react';
+import { Sparkles, Github, Linkedin, Figma, Dribbble, ArrowDown, ArrowUpRight, MessageSquareQuote, Download } from 'lucide-react';
 import { AVATAR_URL } from '../../data/index.js';
 import './Hero.css';
 
@@ -165,6 +165,19 @@ export default function Hero({ isDark, onContactClick, onWorkClick }) {
               <span>Say Hello</span>
               <MessageSquareQuote size={13} className="text-hotpink" />
             </button>
+            <a
+              id="btn-hero-resume"
+              href="/resume.pdf"
+              download="Aileen_Lagura_Resume.pdf"
+              className={`w-full sm:w-auto px-7 py-3.5 rounded-full font-sans text-xs font-semibold uppercase tracking-wider border active:scale-95 cursor-pointer transition-all flex items-center justify-center gap-2 backdrop-blur-md ${
+                isDark
+                  ? 'bg-white/5 border-white/10 hover:bg-white/15 text-gray-200'
+                  : 'bg-white/35 text-gray-700 border-white/50 hover:bg-white/50 shadow-sm shadow-rose-100/5'
+              }`}
+            >
+              <span>Download CV</span>
+              <Download size={13} className="text-hotpink" />
+            </a>
           </motion.div>
 
           {/* Social icons panel */}

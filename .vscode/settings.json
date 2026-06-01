@@ -13,6 +13,6 @@
   },
   "problems.decorations.enabled": true,
   "editor.codeActionsOnSave": {
-    "source.fixAll": false
+    "source.fixAll": "never"
   }
 }

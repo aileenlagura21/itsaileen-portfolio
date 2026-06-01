@@ -26,25 +26,19 @@ export default function Footer({ isDark }) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-6">
         
         {/* Logos & copyright */}
-        <div className="text-center sm:text-left space-y-1.5">
-          <div className="flex items-center justify-center sm:justify-start gap-2 text-hotpink">
+        <div className="text-center mx-auto">
+          <div className="flex items-center justify-center gap-2 text-hotpink">
             <Logo size={32} isDark={isDark} showTagline={false} />
-            <span className="font-display font-medium font-semibold text-sm">Aileen Lagura Creative Labs</span>
+            <span className="font-display font-semibold text-sm">Aileen Lagura Creative Labs</span>
           </div>
           <p className="font-mono text-[10px] uppercase tracking-wide">
             © 2026 Aileen Lagura • All rights reserved.
           </p>
         </div>
 
-        {/* Handcrafted statement */}
-        <div className="text-center">
-          <p className="font-sans text-[11px] leading-relaxed">
-            Beautifully handcrafted. Built with <span className="text-hotpink font-medium">React</span>, <span className="text-hotpink font-medium">Tailwind CSS</span>, and <span className="text-hotpink font-medium">Framer Motion</span>.
-          </p>
-        </div>
 
         {/* Scroll back to top bubble */}
-        <div className="text-center">
+        <div>
           <button
             id="btn-footer-back-to-top"
             onClick={handleScrollToTop}

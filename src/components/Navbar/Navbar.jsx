@@ -5,7 +5,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Menu, X, Sun, Moon, Wand2, EyeOff, Eye, Download } from 'lucide-react';
+import { Menu, X, Sun, Moon, Wand2, EyeOff, Eye } from 'lucide-react';
 import Logo from '../Logo/Logo.jsx';
 import './Navbar.css';
 
@@ -75,65 +75,6 @@ export default function Navbar({ isDark, toggleTheme, cursorEnabled, toggleCurso
     }
   };
 
-  const handleDownloadCV = () => {
-    // Generate organic sweet text content simulating a professional summary CV
-    const cvText = `
----------------------------------------------------------------
-AILEEN T. LAGURA
-Dagohoy, Bilar, Bohol
-aileenlagura16@gmail.com | 09945122977
----------------------------------------------------------------
-
-PERSONAL BACKGROUND
-Motivated Computer Science student seeking an On-the-Job Training (OJT) placement to apply academic training in programming and problem-solving within a professional tech environment. Eager to learn from experienced developers, contribute to real-world projects, and support team objectives while fulfilling academic requirements.
-
-PERSONAL DETAILS
-- Nickname      : "ai"
-- Age           : 20 years old
-- Civil Status  : Single
-- Birth Date    : October 30, 2005
-- Residence     : Bilar, Bohol
-- Religion      : Roman Catholic
-
-RELEVANT COURSEWORK
-- Data Management, Web Development, Mobile App Development
-
-TOOLS & SOFTWARE
-- Microsoft Office Suite (Word, Excel, PowerPoint)
-- Google Workspace (Docs, Sheets, Slides, Calendar, Meet)
-- Zoom, Canva
-
-SKILLS
-- Computer Literate, Communication Skills, Administrative Tasks, Time Management, Can work with less supervision, Eager to learn, Open-minded
-
-EDUCATION
-- Tertiary      : BOHOL ISLAND STATE UNIVERSITY - Bilar
-                  Zamora, Bilar, Bohol
-                  Bachelor of Science in Computer Science
-                  S.Y. 2023 - Present
-- Secondary     : BILAR NATIONAL HIGH SCHOOL
-                  Yanaya, Bilar, Bohol
-                  Strand: Computer Systems Servicing (CSS)
-                  S.Y. 2022 - 2023
-- Elementary    : DAGOHOY ELEMENTARY SCHOOL
-                  Dagohoy, Bilar, Bohol
-                  S.Y. 2016 - 2017
-
-REFERENCES
-- Danie Baldesco (Class Adviser – BISU Bilar)
-  Email: dbaldesco@yahoo.com | Phone: 09225032227
-
-Thank you for downloading Aileen Lagura's digital CV!
-    `;
-    
-    const blob = new Blob([cvText], { type: 'text/plain' });
-    const link = document.createElement('a');
-    link.href = URL.createObjectURL(blob);
-    link.download = 'Aileen_Lagura_CV.txt';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  };
 
   return (
     <>
@@ -229,19 +170,7 @@ Thank you for downloading Aileen Lagura's digital CV!
                 {isDark ? <Sun size={16} /> : <Moon size={16} />}
               </button>
 
-              {/* Download CV */}
-              <button
-                id="btn-navbar-download"
-                onClick={handleDownloadCV}
-                className={`p-2 rounded-lg transition-all ${
-                  isDark
-                    ? 'hover:bg-white/10 text-gray-300 hover:text-hotpink'
-                    : 'hover:bg-white/40 text-gray-600 hover:text-hotpink'
-                }`}
-                title="Download CV"
-              >
-                <Download size={16} />
-              </button>
+
             </div>
           </div>
 
