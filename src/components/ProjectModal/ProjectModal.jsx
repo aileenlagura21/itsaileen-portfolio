@@ -149,7 +149,7 @@ export default function ProjectModal({ project, onClose, isDark }) {
                           </p>
                         </div>
                         {/* Eye Hover Icon overlay */}
-                        <div className="absolute top-3 right-3 w-7 h-7 rounded-full bg-black/45 backdrop-blur-md text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all scale-90 group-hover:scale-100 shadow-lg">
+                        <div className="absolute top-3 right-3 w-7 h-7 rounded-full bg-black/45 backdrop-blur-md text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
                           <Eye size={12} className="text-white" />
                         </div>
                       </div>
@@ -224,7 +224,7 @@ export default function ProjectModal({ project, onClose, isDark }) {
                     href={project.liveUrl}
                     target="_blank"
                     rel="noreferrer"
-                    className="w-full flex items-center justify-center gap-2 py-2 px-4 rounded-xl text-center text-xs tracking-wide font-sans font-medium text-white bg-hotpink hover:bg-hotpink/90 active:scale-95 shadow-md shadow-rose-300/20 transition-all cursor-pointer"
+                    className="w-full flex items-center justify-center gap-2 py-2 px-4 rounded-xl text-center text-xs tracking-wide font-sans font-medium text-white bg-hotpink hover:bg-hotpink/90 active:scale-95 transition-all cursor-pointer"
                   >
                     <span>Inspect Live Showcase</span>
                     <ExternalLink size={13} />
@@ -311,7 +311,7 @@ export default function ProjectModal({ project, onClose, isDark }) {
                   e.stopPropagation();
                   setLightboxIndex((prev) => (prev !== null && prev > 0 ? prev - 1 : project.gallery.length - 1));
                 }}
-                className="absolute left-2 sm:left-4 z-20 p-3 bg-black/60 hover:bg-black/80 hover:scale-105 active:scale-95 text-white border border-white/5 rounded-full transition-all cursor-pointer shadow-lg backdrop-blur-md"
+                className="absolute left-2 sm:left-4 z-20 p-3 bg-black/60 hover:bg-black/80 hover:scale-105 active:scale-95 text-white border border-white/5 rounded-full transition-all cursor-pointer"
                 title="Previous Image"
               >
                 <ChevronLeft size={20} />
@@ -336,7 +336,7 @@ export default function ProjectModal({ project, onClose, isDark }) {
                   e.stopPropagation();
                   setLightboxIndex((prev) => (prev !== null && prev < project.gallery.length - 1 ? prev + 1 : 0));
                 }}
-                className="absolute right-2 sm:right-4 z-20 p-3 bg-black/60 hover:bg-black/80 hover:scale-105 active:scale-95 text-white border border-white/5 rounded-full transition-all cursor-pointer shadow-lg backdrop-blur-md"
+                className="absolute right-2 sm:right-4 z-20 p-3 bg-black/60 hover:bg-black/80 hover:scale-105 active:scale-95 text-white border border-white/5 rounded-full transition-all cursor-pointer"
                 title="Next Image"
               >
                 <ChevronRight size={20} />
