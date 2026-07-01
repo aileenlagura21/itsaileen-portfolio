@@ -3,12 +3,12 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Send, Mail, MapPin, Sparkles, CheckCircle2, AlertCircle, Phone, Globe, Github, Linkedin, Figma, Bookmark } from 'lucide-react';
+import { Send, Mail, CheckCircle2, AlertCircle, Github, Linkedin } from 'lucide-react';
 
 export default function Contact({ isDark }) {
-  // Form states backed up by Local Storage!
+  // Form states
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [subject, setSubject] = useState('');
@@ -17,44 +17,7 @@ export default function Contact({ isDark }) {
   // Status handlers
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isDraftRestored, setIsDraftRestored] = useState(false);
   const [toastMessage, setToastMessage] = useState(null);
-
-  // 1. Restore drafts from LocalStorage
-  useEffect(() => {
-    const savedName = localStorage.getItem('draft_aileen_name');
-    const savedEmail = localStorage.getItem('draft_aileen_email');
-    const savedSubject = localStorage.getItem('draft_aileen_subject');
-    const savedMsg = localStorage.getItem('draft_aileen_message');
-
-    if (savedName || savedEmail || savedSubject || savedMsg) {
-      if (savedName) setName(savedName);
-      if (savedEmail) setEmail(savedEmail);
-      if (savedSubject) setSubject(savedSubject);
-      if (savedMsg) setMessage(savedMsg);
-      setIsDraftRestored(true);
-
-      // Flash restored notification then dismiss
-      setTimeout(() => setIsDraftRestored(false), 4500);
-    }
-  }, []);
-
-  // 2. Continually capture and write changes to LocalStorage
-  useEffect(() => {
-    localStorage.setItem('draft_aileen_name', name);
-  }, [name]);
-
-  useEffect(() => {
-    localStorage.setItem('draft_aileen_email', email);
-  }, [email]);
-
-  useEffect(() => {
-    localStorage.setItem('draft_aileen_subject', subject);
-  }, [subject]);
-
-  useEffect(() => {
-    localStorage.setItem('draft_aileen_message', message);
-  }, [message]);
 
   const validateForm = () => {
     const checkErrors = {};
@@ -82,31 +45,48 @@ export default function Contact({ isDark }) {
     return Object.keys(checkErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!validateForm()) return;
 
     setIsSubmitting(true);
 
-    // Simulate sending network latency
-    setTimeout(() => {
+    const recipientEmail = 'aileenlagura16@gmail.com';
+
+    try {
+      // Using Formsubmit.co to send directly to your email without a backend
+      const response = await fetch(`https://formsubmit.co/ajax/${recipientEmail}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        body: JSON.stringify({
+          name: name.trim(),
+          email: email.trim(),
+          _subject: subject.trim() || 'New contact form message', // _subject sets the email subject line
+          message: message.trim(),
+        }),
+      });
+
+      if (response.ok) {
+        // Clear the form fields on success
+        setName('');
+        setEmail('');
+        setSubject('');
+        setMessage('');
+
+        setToastMessage('Message sent directly to my inbox! I will get back to you soon.');
+      } else {
+        setToastMessage('Failed to send message. Please try again or email me directly.');
+      }
+    } catch (error) {
+      setToastMessage('Network error. Please check your connection and try again.');
+    } finally {
       setIsSubmitting(false);
-      setToastMessage('Successfully Sent! Thank you so much for getting in touch. I will answer your prompt within 24 hours! 😊');
-
-      // Clear values & wipe local cache
-      setName('');
-      setEmail('');
-      setSubject('');
-      setMessage('');
-      localStorage.removeItem('draft_aileen_name');
-      localStorage.removeItem('draft_aileen_email');
-      localStorage.removeItem('draft_aileen_subject');
-      localStorage.removeItem('draft_aileen_message');
-
-      // Dismiss success alert automatically after 5 sec
       setTimeout(() => setToastMessage(null), 5000);
-    }, 1800);
+    }
   };
 
   return (
@@ -130,8 +110,7 @@ export default function Contact({ isDark }) {
 
         {/* Quick Contacts Bar: Email, LinkedIn, GitHub */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-2xl mx-auto mb-10">
-                    {/* Email */}
-                  {/* Email */}
+          {/* Email */}
           <motion.a
             id="link-contact-email"
             href="https://mail.google.com/mail/?view=cm&fs=1&to=aileenlagura16@gmail.com&su=Hello%20Aileen"
@@ -234,20 +213,6 @@ export default function Contact({ isDark }) {
         {/* Floating Custom Notification Toast Alerts inside contact section */}
         <div className="max-w-2xl mx-auto mb-8 space-y-3">
           <AnimatePresence>
-            {isDraftRestored && (
-              <motion.div
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                className="p-4 rounded-2xl border text-left flex items-start gap-3 bg-[#fff0f3] border-pink-200 text-hotpink shadow-sm"
-              >
-                <Bookmark size={16} className="shrink-0 mt-0.5" />
-                <div className="text-xs">
-                  <span className="font-bold">Draft Restored!</span> We auto-loaded your unfinished form.
-                </div>
-              </motion.div>
-            )}
-
             {toastMessage && (
               <motion.div
                 id="contact-success-toast"
@@ -280,7 +245,6 @@ export default function Contact({ isDark }) {
             <input
               id="ct-name"
               type="text"
-              placeholder="Your Name"
               value={name}
               onChange={(e) => {
                 setName(e.target.value);
@@ -310,7 +274,6 @@ export default function Contact({ isDark }) {
             <input
               id="ct-email"
               type="text"
-              placeholder="your.email@domain.com"
               value={email}
               onChange={(e) => {
                 setEmail(e.target.value);
@@ -340,7 +303,6 @@ export default function Contact({ isDark }) {
             <input
               id="ct-subject"
               type="text"
-              placeholder="Subject"
               value={subject}
               onChange={(e) => {
                 setSubject(e.target.value);
@@ -370,7 +332,6 @@ export default function Contact({ isDark }) {
             <textarea
               id="ct-message"
               rows={5}
-              placeholder="Type your message here..."
               value={message}
               onChange={(e) => {
                 setMessage(e.target.value);
@@ -395,7 +356,7 @@ export default function Contact({ isDark }) {
           {/* Form actions */}
           <div className="pt-2 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <span className="text-[10px] text-gray-400 font-mono leading-tight">
-              🔒 Protected client-side storage
+              🔒 Securely sent to my inbox
             </span>
 
             <button
