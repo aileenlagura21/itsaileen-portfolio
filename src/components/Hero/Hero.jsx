@@ -15,7 +15,7 @@ const ROLES = [
   'Frontend Developer 💻'
 ];
 
-const HERO_NAME = 'Aileen Lagura';
+const HERO_NAME = 'Aileen Lagura !';
 
 function useLoopingTypewriter(text, speed = 120, pauseMs = 1600, resetMs = 450) {
   const [output, setOutput] = useState('');
@@ -70,6 +70,10 @@ export default function Hero({ isDark, onContactClick, onWorkClick }) {
   const [displayText, setDisplayText] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
   const typedName = useLoopingTypewriter(HERO_NAME, 120, 1800, 500);
+  const resumePath = '/resume/Aileen_Resume.docx';
+  const resumeViewerUrl = `https://view.officeapps.live.com/op/view.aspx?src=${encodeURIComponent(
+    `${window.location.origin}${resumePath}`
+  )}`;
 
   // High performance Typing Effect loop
   useEffect(() => {
@@ -295,8 +299,8 @@ export default function Hero({ isDark, onContactClick, onWorkClick }) {
             </motion.button>
             <motion.a
               id="btn-hero-resume"
-              href="/resume/Aileen-Resume.docx"
-              download="Aileen-Resume.docx"
+              href={resumePath}
+              download="Aileen_Resume.docx"
               animate={{ y: [0, -4, 0, 4, 0], rotate: [0, 2, 0, -2, 0] }}
               transition={{ duration: 4.8, repeat: Infinity, ease: 'easeInOut', delay: 0.4 }}
               className={`w-full sm:w-auto px-7 py-3.5 rounded-full font-sans text-xs font-semibold uppercase tracking-wider border active:scale-95 cursor-pointer transition-all flex items-center justify-center gap-2 backdrop-blur-md hover:bg-hotpink hover:text-white hover:border-hotpink group ${
