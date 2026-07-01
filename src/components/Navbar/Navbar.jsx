@@ -188,33 +188,79 @@ export default function Navbar({ isDark, toggleTheme }) {
         {/* Mobile Menu */}
         <AnimatePresence>
           {mobileOpen && (
-            <motion.div
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              id="mobile-menu"
-              className={`md:hidden mt-4 pb-4 border-t ${
-                isDark ? 'border-white/10' : 'border-white/50'
-              }`}
+            <div
+              className="md:hidden fixed inset-0 z-50 bg-black/10 backdrop-blur-[6px]"
+              onClick={() => setMobileOpen(false)}
             >
-              <div className="max-w-7xl mx-auto px-4 space-y-2">
+              <motion.div
+                initial={{ opacity: 0, y: -12 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -12 }}
+                onClick={(event) => event.stopPropagation()}
+                className={`absolute left-4 right-4 top-[72px] overflow-hidden rounded-[28px] border shadow-[0_24px_80px_rgba(0,0,0,0.18)] backdrop-blur-3xl ${
+                  isDark
+                    ? 'border-white/10 bg-white/8 text-white'
+                    : 'border-white/60 bg-white/55 text-gray-900'
+                }`}
+              >
+                <div className={`absolute inset-0 pointer-events-none ${
+                  isDark
+                    ? 'bg-gradient-to-br from-white/10 via-transparent to-hotpink/10'
+                    : 'bg-gradient-to-br from-white/70 via-white/35 to-pink-100/60'
+                }`} />
+                <div className="relative p-4">
+                  <div className="mb-4 flex items-center justify-between">
+                    <div>
+                      <p className={`text-[10px] font-mono uppercase tracking-[0.35em] ${isDark ? 'text-gray-300' : 'text-gray-500'}`}>
+                        Navigation
+                      </p>
+                      <p className={`mt-1 text-sm font-semibold ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                        Explore the portfolio
+                      </p>
+                    </div>
+                    <div className={`h-10 w-10 rounded-full border flex items-center justify-center ${
+                      isDark ? 'border-white/10 bg-white/5' : 'border-white/70 bg-white/70'
+                    }`}>
+                      <Logo size={24} isDark={isDark} showTagline={false} />
+                    </div>
+                  </div>
+
+                  <div className="space-y-2">
                 {MENU_ITEMS.map((item) => (
                   <button
                     key={item.id}
                     onClick={() => handleScrollTo(item.id)}
-                    className={`block w-full text-left px-4 py-2 rounded text-sm font-semibold ${
+                    className={`block w-full text-left rounded-2xl border px-4 py-3 text-sm font-semibold transition-all backdrop-blur-md ${
                       activeSection === item.id
-                        ? 'bg-hotpink text-white'
+                        ? 'border-hotpink/40 bg-hotpink/95 text-white shadow-lg shadow-hotpink/25'
                         : isDark
-                        ? 'text-gray-300 hover:bg-white/10'
-                        : 'text-gray-600 hover:bg-white/30'
+                        ? 'border-white/10 bg-white/5 text-gray-100 hover:border-white/20 hover:bg-white/10 hover:text-white'
+                        : 'border-white/70 bg-white/55 text-gray-700 hover:border-white/90 hover:bg-white/80 hover:text-gray-900'
                     }`}
                   >
                     {item.label}
                   </button>
                 ))}
-              </div>
-            </motion.div>
+                  </div>
+
+                <button
+                  id="btn-navbar-mobile-theme"
+                  onClick={toggleTheme}
+                  className={`mt-4 flex w-full items-center justify-between gap-4 rounded-2xl border px-4 py-3 text-sm font-semibold transition-all focus:outline-none focus:ring-2 focus:ring-hotpink ${
+                    isDark
+                      ? 'border-white/10 bg-white/5 text-gray-100 hover:border-white/20 hover:bg-white/10'
+                      : 'border-white/70 bg-white/65 text-gray-800 hover:border-white/90 hover:bg-white/85'
+                  }`}
+                  title={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+                  aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+                  aria-pressed={isDark}
+                >
+                  <span className="min-w-0 flex-1 text-left">{isDark ? 'Light Mode' : 'Dark Mode'}</span>
+                  {isDark ? <Sun size={16} /> : <Moon size={16} />}
+                </button>
+                </div>
+              </motion.div>
+            </div>
           )}
         </AnimatePresence>
       </nav>
