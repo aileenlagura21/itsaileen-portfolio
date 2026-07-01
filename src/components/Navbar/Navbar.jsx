@@ -5,7 +5,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Menu, X, Sun, Moon, Wand2, EyeOff, Eye } from 'lucide-react';
+import { Menu, X, Sun, Moon } from 'lucide-react';
 import Logo from '../Logo/Logo.jsx';
 import './Navbar.css';
 
@@ -25,7 +25,7 @@ const MENU_ITEMS = [
   { id: 'contact', label: 'Contact' },
 ];
 
-export default function Navbar({ isDark, toggleTheme, cursorEnabled, toggleCursor }) {
+export default function Navbar({ isDark, toggleTheme }) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
@@ -86,14 +86,18 @@ export default function Navbar({ isDark, toggleTheme, cursorEnabled, toggleCurso
               : 'bg-white/30 border-b border-white/50 backdrop-blur-xl shadow-sm shadow-rose-100/10 py-3'
             : 'bg-transparent py-5'
         }`}
+        role="navigation"
+        aria-label="Main navigation"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-          
+
           {/* Logo & Vibe */}
           <button
             id="nav-logo"
             onClick={() => handleScrollTo('home')}
-            className="flex items-center gap-1.5 cursor-pointer group"
+            className="flex items-center gap-1.5 cursor-pointer group focus:outline-none focus:ring-2 focus:ring-hotpink rounded-lg"
+            aria-label="Aileen Lagura - Home"
+            title="Go to home section"
           >
             <div className="w-11 h-11 flex items-center justify-center transform group-hover:scale-105 group-hover:rotate-6 transition-transform duration-300">
               <Logo size={46} isDark={isDark} showTagline={false} />
@@ -101,7 +105,7 @@ export default function Navbar({ isDark, toggleTheme, cursorEnabled, toggleCurso
             <div className="text-left font-display">
               <p className="text-sm font-bold tracking-tight text-hotpink leading-tight">Aileen Lagura</p>
               <p className={`text-[10px] font-mono tracking-widest uppercase leading-none ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
-                Creative Labs
+
               </p>
             </div>
           </button>
@@ -116,15 +120,17 @@ export default function Navbar({ isDark, toggleTheme, cursorEnabled, toggleCurso
                     key={item.id}
                     id={`nav-link-${item.id}`}
                     onClick={() => handleScrollTo(item.id)}
-                    className={`relative px-1 py-1 font-sans text-xs font-semibold tracking-wider uppercase cursor-pointer transition-colors duration-200 ${
+                    className={`relative px-1 py-1 font-sans text-xs font-semibold tracking-wider uppercase cursor-pointer transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-hotpink rounded-lg ${
                       isActive
-                        ? isDark 
-                          ? 'text-hotpink' 
+                        ? isDark
+                          ? 'text-hotpink'
                           : 'text-hotpink font-bold'
                         : isDark
                           ? 'text-gray-300 hover:text-hotpink'
                           : 'text-gray-600 hover:text-hotpink'
                     }`}
+                    aria-current={isActive ? 'page' : undefined}
+                    aria-label={item.label}
                   >
                     {item.label}
                     {isActive && (
@@ -139,47 +145,37 @@ export default function Navbar({ isDark, toggleTheme, cursorEnabled, toggleCurso
               })}
             </div>
 
-            {/* Custom Control Bar (Theme, Custom Cursor, Download Resume) */}
-            <div className="flex items-center gap-2 border-l pl-5 border-pink-200/40 dark:border-plum-border">
-              
-              {/* Tracker Toggle */}
-              <button
-                id="btn-navbar-cursor"
-                onClick={toggleCursor}
-                className={`p-2 rounded-lg transition-all ${
-                  isDark
-                    ? 'hover:bg-white/10 text-gray-300 hover:text-hotpink'
-                    : 'hover:bg-white/40 text-gray-600 hover:text-hotpink'
-                }`}
-                title="Toggle custom cursor"
-              >
-                {cursorEnabled ? <Eye size={16} /> : <EyeOff size={16} />}
-              </button>
+
 
               {/* Theme Toggle */}
               <button
                 id="btn-navbar-theme"
                 onClick={toggleTheme}
-                className={`p-2 rounded-lg transition-all ${
+                className={`p-2 rounded-lg transition-all focus:outline-none focus:ring-2 focus:ring-hotpink ${
                   isDark
                     ? 'hover:bg-white/10 text-gray-300 hover:text-hotpink'
                     : 'hover:bg-white/40 text-gray-600 hover:text-hotpink'
                 }`}
-                title="Toggle dark mode"
+                title={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+                aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+                aria-pressed={isDark}
               >
                 {isDark ? <Sun size={16} /> : <Moon size={16} />}
               </button>
 
 
-            </div>
+
           </div>
 
           {/* Mobile Menu Toggle */}
           <button
             id="btn-navbar-mobile-menu"
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="md:hidden p-2"
+            className="md:hidden p-2 focus:outline-none focus:ring-2 focus:ring-hotpink rounded-lg"
             title="Toggle menu"
+            aria-label="Toggle navigation menu"
+            aria-expanded={mobileOpen}
+            aria-controls="mobile-menu"
           >
             {mobileOpen ? (
               <X size={24} className={isDark ? 'text-white' : 'text-gray-800'} />
@@ -196,6 +192,7 @@ export default function Navbar({ isDark, toggleTheme, cursorEnabled, toggleCurso
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
+              id="mobile-menu"
               className={`md:hidden mt-4 pb-4 border-t ${
                 isDark ? 'border-white/10' : 'border-white/50'
               }`}

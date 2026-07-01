@@ -5,15 +5,14 @@
 
 import { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
-import { Sparkles, Github, Linkedin, Figma, Dribbble, ArrowDown, ArrowUpRight, MessageSquareQuote, Download } from 'lucide-react';
-import { AVATAR_URL } from '../../data/index.js';
-import './Hero.css';
+import { Sparkles, Github, Linkedin, Figma, Dribbble, ArrowDown, ArrowUpRight, MessageSquareQuote, FileDown } from 'lucide-react';
+import { AVATAR_URL } from '../../data';
 
 const ROLES = [
-  'UI/UX Product Designer 🪄',
-  'Frontend Web Developer 💻',
-  'Brand Art Director 🌸',
-  'Creative digital Storyteller ✨'
+  'Computer Scientist 🖥️',
+  'IT Support Specialist 🛠️',
+  'System Administrator ⚙️',
+  'Frontend Developer 💻'
 ];
 
 export default function Hero({ isDark, onContactClick, onWorkClick }) {
@@ -26,7 +25,7 @@ export default function Hero({ isDark, onContactClick, onWorkClick }) {
   useEffect(() => {
     let timer;
     const currentRole = ROLES[roleIndex];
-    
+
     if (isDeleting) {
       timer = setTimeout(() => {
         setDisplayText(currentRole.substring(0, charIndex - 1));
@@ -55,50 +54,116 @@ export default function Hero({ isDark, onContactClick, onWorkClick }) {
       id="home"
       className="relative min-h-[96vh] flex items-center justify-center pt-24 sm:pt-28 md:pt-32 pb-12 overflow-hidden px-4 sm:px-6 lg:px-8"
     >
-      {/* Dynamic flowing background decor */}
-      <div className="absolute inset-0 pointer-events-none opacity-45 dark:opacity-20">
-        <div className="absolute top-[15%] left-[10%] w-72 h-72 rounded-full filter blur-[100px] bg-pastelpink animate-floating-slower" />
-        <div className="absolute bottom-[20%] right-[15%] w-[340px] h-[340px] rounded-full filter blur-[120px] bg-softrose animate-floating" />
-        <div className="absolute top-[40%] right-[30%] w-48 h-48 rounded-full filter blur-[80px] bg-peach" />
-      </div>
 
-      {/* Scattered aesthetic floating structural vector stickers (pure CSS drawings) */}
-      <div className="absolute top-[18%] left-[8%] hidden lg:block animate-floating opacity-70">
-        <div className="relative w-10 h-10 border-2 border-hotpink/40 rounded-xl rotate-12 flex items-center justify-center">
-          <span className="text-[10px] text-hotpink font-mono">grid</span>
-        </div>
-      </div>
-      <div className="absolute bottom-[25%] left-[12%] hidden lg:block animate-floating-slower opacity-65">
-        <div className="relative w-12 h-12 flex items-center justify-center">
-          <Sparkles className="text-cherry/50 rotate-[15deg]" size={24} />
-        </div>
-      </div>
-      <div className="absolute top-[28%] right-[10%] hidden lg:block animate-floating-slower opacity-70">
-        <div className="px-3 py-1.5 rounded-full border border-pink-200/60 bg-white/70 dark:bg-plum-card text-[11px] font-mono font-medium text-hotpink shadow-sm">
-          Figma autolayout
-        </div>
-      </div>
 
-      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10 w-full">
-        
-        {/* Texts Column (Col span 7) */}
-        <div className="lg:col-span-7 flex flex-col text-center lg:text-left space-y-6">
-          
+      <div className="max-w-4xl mx-auto flex flex-col items-center text-center relative z-10 w-full">
+
+        <div className="flex flex-col items-center text-center space-y-7 w-full">
+
+          {/* Elegant Avatar with integrated Available for Hire badge - placed first on top! */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.85 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, type: 'spring', damping: 20 }}
+            className="relative self-center mb-1"
+          >
+            {/* Circular frames & borders behind image */}
+            <div className="absolute inset-0 rounded-full border border-dashed border-hotpink/30 animate-spin" style={{ animationDuration: '40s' }} />
+
+            {/* Avatar frame container */}
+            <div className="w-44 h-44 sm:w-52 sm:h-52 rounded-full p-2.5 bg-gradient-to-tr from-pastelpink via-hotpink/20 to-peach/30 shadow-inner relative z-10">
+              <div className="w-full h-full rounded-full overflow-hidden bg-white dark:bg-zinc-950 border border-pink-200/40 relative shadow-md group">
+                <img
+                  src={AVATAR_URL}
+                  alt="Aileen Lagura Portrait"
+                  referrerPolicy="no-referrer"
+                  className="w-full h-full object-cover transform scale-[1.02] group-hover:scale-106 transition-transform duration-500"
+                />
+              </div>
+            </div>
+
+            {/* Floating Available for Hire Badge sitting on the shoulder of the avatar */}
+           {/* Available for Hire Button */}
+<button
+  onClick={onContactClick}
+  type="button"
+  className="
+    absolute
+    left-1/2
+    top-full
+    -translate-x-1/2
+    mt-3
+
+    flex
+    items-center
+    gap-2
+
+    px-4
+    py-2
+
+    rounded-full
+
+    bg-white/80
+    dark:bg-zinc-900/90
+
+    text-green-600
+    dark:text-green-400
+
+    text-[10px]
+    sm:text-[11px]
+
+    font-mono
+    font-bold
+    uppercase
+    tracking-[0.22em]
+
+    border
+    border-green-400/30
+
+    backdrop-blur-xl
+
+    shadow-lg
+    shadow-green-300/20
+
+    hover:scale-105
+    hover:shadow-green-400/30
+
+    active:scale-95
+
+    transition-all
+    duration-300
+
+    whitespace-nowrap
+    cursor-pointer
+
+    z-30
+  "
+>
+  <span className="relative flex h-2 w-2">
+    <span className="absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75 animate-ping" />
+    <span className="relative inline-flex h-2 w-2 rounded-full bg-green-500" />
+  </span>
+
+  <span>Available for Hire</span>
+</button>
+          </motion.div>
+
+          {/* Welcome to my digital garden - placed below the picture */}
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="inline-flex justify-center lg:justify-start"
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="flex flex-col gap-3 items-center"
           >
             <div className="flex items-center gap-1.5 px-4 py-1.5 rounded-full border border-white/40 dark:border-white/10 bg-white/30 dark:bg-white/5 backdrop-blur-md shadow-sm shadow-rose-100/5">
               <Sparkles className="text-hotpink" size={14} />
               <span className="text-xs font-mono font-semibold tracking-wider text-hotpink uppercase">
-                Welcome to my digital garden
+
               </span>
             </div>
           </motion.div>
 
-          <div className="space-y-4">
+          <div className="space-y-4 w-full">
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -107,17 +172,27 @@ export default function Hero({ isDark, onContactClick, onWorkClick }) {
                 isDark ? 'text-white' : 'text-gray-900'
               }`}
             >
-              Hi, I'm <span className="text-hotpink text-glow-pink">Aileen Lagura</span> 
+              Hi, I’m <span className="text-hotpink text-glow-pink">Aileen Lagura</span>
             </motion.h1>
-            
+
+            <motion.h2
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.25 }}
+              className={`text-lg sm:text-xl lg:text-2xl font-display font-semibold leading-snug ${
+                isDark ? 'text-pink-100' : 'text-gray-800'
+              }`}
+            >
+            </motion.h2>
+
             {/* Typing Container with Fixed Height to avoid layout shift */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="h-10 sm:h-12 flex items-center justify-center lg:justify-start"
+              className="h-10 sm:h-12 flex items-center justify-center"
             >
-              <p className="text-base sm:text-xl font-mono text-hotpink font-semibold">
+              <p className="text-base sm:text-lg font-mono text-hotpink font-semibold">
                 <span className={`px-2 py-1 rounded-lg backdrop-blur-md border border-white/30 dark:border-white/5 ${isDark ? 'bg-white/5' : 'bg-white/20'}`}>
                   {displayText}
                 </span>
@@ -129,13 +204,12 @@ export default function Hero({ isDark, onContactClick, onWorkClick }) {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className={`text-sm sm:text-base leading-relaxed max-w-xl mx-auto lg:mx-0 font-sans ${
+              className={`text-sm sm:text-base leading-relaxed max-w-2xl mx-auto font-sans ${
                 isDark ? 'text-gray-300' : 'text-gray-600'
               }`}
             >
-              I design and build warm, lightweight personal brands, accessibility-focused design modules, 
-              and highly responsive full-stack dashboards. Blending beautiful Korean minimalism with scalable TypeScript architectures.
-            </motion.p>
+              Applying my Computer Science studies and hands on training to develop impactful solutions and support modern technology environments.
+              </motion.p>
           </div>
 
           {/* Action Buttons */}
@@ -143,41 +217,47 @@ export default function Hero({ isDark, onContactClick, onWorkClick }) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.5 }}
-            className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4"
+            className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full"
           >
-            <button
+            <motion.button
               id="btn-hero-work"
               onClick={onWorkClick}
+              animate={{ y: [0, -4, 0, 4, 0], rotate: [0, 2, 0, -2, 0] }}
+              transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
               className="w-full sm:w-auto px-7 py-3.5 rounded-full bg-hotpink text-white font-sans text-xs font-semibold uppercase tracking-wider hover:bg-hotpink/95 active:scale-95 shadow-md shadow-pink-300/20 cursor-pointer transition-all flex items-center justify-center gap-2 group"
             >
               <span>Explore My Work</span>
               <ArrowUpRight size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-            </button>
-            <button
+            </motion.button>
+            <motion.button
               id="btn-hero-contact"
               onClick={onContactClick}
+              animate={{ y: [0, -4, 0, 4, 0], rotate: [0, 2, 0, -2, 0] }}
+              transition={{ duration: 4.4, repeat: Infinity, ease: 'easeInOut', delay: 0.2 }}
               className={`w-full sm:w-auto px-7 py-3.5 rounded-full font-sans text-xs font-semibold uppercase tracking-wider border active:scale-95 cursor-pointer transition-all flex items-center justify-center gap-2 backdrop-blur-md ${
                 isDark
                   ? 'bg-white/5 border-white/10 hover:bg-white/15 text-gray-200'
-                  : 'bg-white/35 text-gray-700 border-white/50 hover:bg-white/50 shadow-sm shadow-rose-100/5'
+                  : 'bg-white/35 text-gray-700 border-white/50 shadow-sm shadow-rose-100/5'
               }`}
             >
               <span>Say Hello</span>
               <MessageSquareQuote size={13} className="text-hotpink" />
-            </button>
-            <a
+            </motion.button>
+            <motion.a
               id="btn-hero-resume"
-              href="/resume.pdf"
-              download="Aileen_Lagura_Resume.pdf"
-              className={`w-full sm:w-auto px-7 py-3.5 rounded-full font-sans text-xs font-semibold uppercase tracking-wider border active:scale-95 cursor-pointer transition-all flex items-center justify-center gap-2 backdrop-blur-md ${
+              href="/resume/Aileen-Resume.docx"
+              download="Aileen-Resume.docx"
+              animate={{ y: [0, -4, 0, 4, 0], rotate: [0, 2, 0, -2, 0] }}
+              transition={{ duration: 4.8, repeat: Infinity, ease: 'easeInOut', delay: 0.4 }}
+              className={`w-full sm:w-auto px-7 py-3.5 rounded-full font-sans text-xs font-semibold uppercase tracking-wider border active:scale-95 cursor-pointer transition-all flex items-center justify-center gap-2 backdrop-blur-md hover:bg-hotpink hover:text-white hover:border-hotpink group ${
                 isDark
-                  ? 'bg-white/5 border-white/10 hover:bg-white/15 text-gray-200'
-                  : 'bg-white/35 text-gray-700 border-white/50 hover:bg-white/50 shadow-sm shadow-rose-100/5'
+                  ? 'bg-white/5 border-white/10 text-gray-200'
+                  : 'bg-white/35 text-gray-700 border-white/50 shadow-sm shadow-rose-100/5'
               }`}
             >
-              <span>Download CV</span>
-              <Download size={13} className="text-hotpink" />
-            </a>
+              <span>Resume</span>
+              <FileDown size={13} className="text-hotpink group-hover:text-white transition-colors" />
+            </motion.a>
           </motion.div>
 
           {/* Social icons panel */}
@@ -185,63 +265,65 @@ export default function Hero({ isDark, onContactClick, onWorkClick }) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.7, delay: 0.6 }}
-            className="flex items-center justify-center lg:justify-start gap-4 pt-4 text-xs font-mono text-gray-400"
+            className="flex items-center justify-center gap-4 pt-4 text-xs font-mono text-gray-400"
           >
             <span className="uppercase tracking-widest text-[10px]">Follow me:</span>
             <div className="flex gap-2.5">
               {[
-                { id: 'lnk-sc-github', icon: <Github size={15} />, url: 'https://github.com' },
+                { id: 'lnk-sc-github', icon: <Github size={15} />, url: 'https://github.com/aileenlagura21' },
                 { id: 'lnk-sc-linkedin', icon: <Linkedin size={15} />, url: 'https://linkedin.com' },
-                { id: 'lnk-sc-figma', icon: <Figma size={15} />, url: 'https://figma.com' },
-                { id: 'lnk-sc-dribbble', icon: <Dribbble size={15} />, url: 'https://dribbble.com' },
               ].map((sc, i) => (
-                <a
+                <motion.a
                   key={i}
                   id={sc.id}
                   href={sc.url}
                   target="_blank"
                   rel="noreferrer"
+                  animate={{
+                    y: [0, -3, 0, 3, 0],
+                    rotate: [0, 8, 0, -8, 0],
+                  }}
+                  transition={{
+                    duration: 3.2 + i * 0.4,
+                    repeat: Infinity,
+                    ease: 'easeInOut',
+                    delay: i * 0.25,
+                  }}
                   className={`p-2.5 rounded-full border transition-all backdrop-blur-md ${
                     isDark
                       ? 'border-white/10 hover:border-hotpink text-gray-300 hover:text-hotpink bg-white/5 shadow-inner'
                       : 'border-white/50 hover:border-hotpink text-gray-500 hover:text-hotpink bg-white/35 shadow-sm shadow-rose-100/10'
                   }`}
-                  title={sc.id}
                 >
                   {sc.icon}
-                </a>
+                </motion.a>
               ))}
             </div>
           </motion.div>
+
         </div>
 
-        {/* Hero Graphics / Illustration (Col span 5) */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.7, delay: 0.3 }}
-          className="lg:col-span-5 relative h-96 md:h-[500px] flex items-center justify-center order-first lg:order-last"
-        >
-          {/* Animated floating card glass frame */}
-          <div className="absolute inset-0 p-6">
-            <div className={`w-full h-full rounded-[40px] overflow-hidden shadow-2xl ${
-              isDark ? 'bg-white/5 border border-white/10' : 'bg-white/40 border border-white/60 shadow-rose-100/40'
-            }`}>
-              <div className="w-full h-full relative overflow-hidden bg-gradient-to-br from-pastelpink to-softrose">
-                {/* Placeholder illustration area */}
-                <img
-                  src={AVATAR_URL}
-                  alt="Aileen Lagura Profile"
-                  className="w-full h-full object-cover"
-                  onError={(e) => {
-                    e.target.style.display = 'none';
-                  }}
-                />
-              </div>
-            </div>
-          </div>
-        </motion.div>
       </div>
+
+      {/* Down indicators */}
+      <div className="absolute bottom-6 inset-x-0 flex justify-center">
+        <button
+          id="btn-hero-scroll-down"
+          onClick={onWorkClick}
+          className={`flex flex-col items-center gap-1 text-[10px] tracking-widest font-mono uppercase cursor-pointer transition-colors ${
+            isDark ? 'text-gray-400 hover:text-hotpink' : 'text-gray-500 hover:text-hotpink'
+          }`}
+        >
+          <span>Scroll Gallery</span>
+          <motion.div
+            animate={{ y: [0, 6, 0] }}
+            transition={{ repeat: Infinity, duration: 1.5 }}
+          >
+            <ArrowDown size={12} className="text-hotpink" />
+          </motion.div>
+        </button>
+      </div>
+
     </section>
   );
 }

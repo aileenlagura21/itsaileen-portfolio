@@ -6,15 +6,14 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Sparkles, Code, Heart, Monitor, Smartphone, Palette, ArrowRight, X, Layers, ToggleLeft } from 'lucide-react';
-import { SERVICES } from '../../data/index.js';
-import './Services.css';
+import { SERVICES } from '../data';
 
 // Helper to resolve Lucide dynamic icons structurally
 function getServiceIcon(iconName, className) {
   switch (iconName) {
     case 'Sparkles':
       return <Sparkles className={className} size={22} />;
-    case 'Code':
+    case 'CodeInside':
       return <Code className={className} size={22} />;
     case 'Heart':
       return <Heart className={className} size={22} />;
@@ -165,7 +164,7 @@ export default function Services({ isDark }) {
                 <div className={`p-4 rounded-2xl border flex flex-col gap-1.5 backdrop-blur-md ${
                   isDark ? 'bg-white/5 border-white/10' : 'bg-white/30 border-white/50'
                 }`}>
-                  <p className="text-[10px] font-mono uppercase text-hotpink font-bold">Standard Timeline</p>
+                  <p className="text-[10px] font-mono uppercase text-hotpink font-bold">Standard Standard Timeline</p>
                   <p className={`text-xs ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
                     ⚡ 7-14 Business Days per typical project package
                   </p>

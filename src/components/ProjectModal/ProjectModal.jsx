@@ -1,4 +1,4 @@
-/**
+﻿/**
  * @license
  * SPDX-License-Identifier: Apache-2.0
  */
@@ -86,7 +86,7 @@ export default function ProjectModal({ project, onClose, isDark }) {
             <div className="lg:col-span-2 space-y-6">
               <div>
                 <h4 className="text-lg font-display font-medium mb-3 text-hotpink flex items-center gap-2">
-                  <span>✨</span> Project Narrative
+                <span>✨</span> Project Narrative
                 </h4>
                 <p className={`text-sm sm:text-base leading-relaxed ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
                   {project.longDescription}
@@ -167,7 +167,7 @@ export default function ProjectModal({ project, onClose, isDark }) {
             }`}>
               <div className="space-y-4">
                 <h4 className="text-base font-display font-medium mb-1 border-b pb-2 text-hotpink flex items-center gap-2 border-pink-100/50">
-                  <span>📋</span> Specs & Info
+                <span>📋</span> Specs & Info
                 </h4>
 
                 {/* Role */}

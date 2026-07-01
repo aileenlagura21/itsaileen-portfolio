@@ -3,8 +3,6 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import './Logo.css';
-
 export default function Logo({ className = '', size = '100%', isDark = false, showTagline = true }) {
   // Adaptation to dark and light mode colors
   const primaryColor = isDark ? '#ffffff' : '#000000';
@@ -145,18 +143,29 @@ export default function Logo({ className = '', size = '100%', isDark = false, sh
             {/* Subtitle brand alignment text */}
             <text
               x="250"
-              y="255"
-              fontFamily="'Plus Jakarta Sans', 'Inter', ui-sans-serif, system-ui, sans-serif"
-              fontSize="11"
-              fontWeight="700"
-              fill={accentColor}
+              y="241"
+              fontFamily="'Cinzel', 'Playfair Display', serif"
+              fontSize="12.5"
+              fontWeight="400"
+              letterSpacing="11"
+              fill={lineAndTagColor}
               textAnchor="middle"
-              opacity="0.8"
-              letterSpacing="3"
-              className="transition-all duration-300"
+              className="transition-colors duration-300 uppercase"
+              opacity="0.9"
             >
               LEARN • CREATE • ELEVATE
             </text>
+            
+            {/* Extremely thin underlying horizontal rule to frame the tagline */}
+            <line
+              x1="65"
+              y1="247"
+              x2="435"
+              y2="247"
+              stroke={isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.06)'}
+              strokeWidth="0.5"
+              className="transition-all duration-300"
+            />
           </g>
         )}
       </svg>

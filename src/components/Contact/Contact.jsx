@@ -6,12 +6,12 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Send, Mail, MapPin, Sparkles, CheckCircle2, AlertCircle, Phone, Globe, Github, Linkedin, Figma, Bookmark } from 'lucide-react';
-import './Contact.css';
 
 export default function Contact({ isDark }) {
   // Form states backed up by Local Storage!
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [subject, setSubject] = useState('');
   const [message, setMessage] = useState('');
 
   // Status handlers
@@ -20,59 +20,62 @@ export default function Contact({ isDark }) {
   const [isDraftRestored, setIsDraftRestored] = useState(false);
   const [toastMessage, setToastMessage] = useState(null);
 
-  // 1. Restore drafts from LocalStorage and watch for changes
+  // 1. Restore drafts from LocalStorage
   useEffect(() => {
-    try {
-      const savedName = localStorage.getItem('draft_hana_name');
-      const savedEmail = localStorage.getItem('draft_hana_email');
-      const savedMsg = localStorage.getItem('draft_hana_message');
+    const savedName = localStorage.getItem('draft_aileen_name');
+    const savedEmail = localStorage.getItem('draft_aileen_email');
+    const savedSubject = localStorage.getItem('draft_aileen_subject');
+    const savedMsg = localStorage.getItem('draft_aileen_message');
 
-      if (savedName || savedEmail || savedMsg) {
-        if (savedName) setName(savedName);
-        if (savedEmail) setEmail(savedEmail);
-        if (savedMsg) setMessage(savedMsg);
-        setIsDraftRestored(true);
+    if (savedName || savedEmail || savedSubject || savedMsg) {
+      if (savedName) setName(savedName);
+      if (savedEmail) setEmail(savedEmail);
+      if (savedSubject) setSubject(savedSubject);
+      if (savedMsg) setMessage(savedMsg);
+      setIsDraftRestored(true);
 
-        // Flash restored notification then dismiss
-        const timeout = setTimeout(() => setIsDraftRestored(false), 4500);
-        return () => clearTimeout(timeout);
-      }
-    } catch (error) {
-      console.warn('Failed to restore drafts from localStorage:', error);
+      // Flash restored notification then dismiss
+      setTimeout(() => setIsDraftRestored(false), 4500);
     }
   }, []);
 
-  // 2. Save form data to LocalStorage whenever it changes
+  // 2. Continually capture and write changes to LocalStorage
   useEffect(() => {
-    try {
-      localStorage.setItem('draft_hana_name', name);
-      localStorage.setItem('draft_hana_email', email);
-      localStorage.setItem('draft_hana_message', message);
-    } catch (error) {
-      console.warn('Failed to save drafts to localStorage:', error);
-    }
-  }, [name, email, message]);
+    localStorage.setItem('draft_aileen_name', name);
+  }, [name]);
+
+  useEffect(() => {
+    localStorage.setItem('draft_aileen_email', email);
+  }, [email]);
+
+  useEffect(() => {
+    localStorage.setItem('draft_aileen_subject', subject);
+  }, [subject]);
+
+  useEffect(() => {
+    localStorage.setItem('draft_aileen_message', message);
+  }, [message]);
 
   const validateForm = () => {
     const checkErrors = {};
 
     if (!name.trim()) {
-      checkErrors.name = 'Please provide your lovely name.';
-    } else if (name.trim().length < 2) {
-      checkErrors.name = 'Name must be at least 2 characters.';
+      checkErrors.name = 'Please provide your name.';
     }
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!email.trim()) {
-      checkErrors.email = 'E-mail address is required.';
+      checkErrors.email = 'Email address is required.';
     } else if (!emailRegex.test(email)) {
-      checkErrors.email = 'Please provide a valid email format sample.';
+      checkErrors.email = 'Please provide a valid email format.';
+    }
+
+    if (!subject.trim()) {
+      checkErrors.subject = 'Please provide a subject.';
     }
 
     if (!message.trim()) {
-      checkErrors.message = 'Please type a quick message.';
-    } else if (message.trim().length < 15) {
-      checkErrors.message = 'Please make your inquiry slightly longer (min 15 characters).';
+      checkErrors.message = 'Please type a message.';
     }
 
     setErrors(checkErrors);
@@ -90,14 +93,16 @@ export default function Contact({ isDark }) {
     setTimeout(() => {
       setIsSubmitting(false);
       setToastMessage('Successfully Sent! Thank you so much for getting in touch. I will answer your prompt within 24 hours! 😊');
-      
+
       // Clear values & wipe local cache
       setName('');
       setEmail('');
+      setSubject('');
       setMessage('');
-      localStorage.removeItem('draft_hana_name');
-      localStorage.removeItem('draft_hana_email');
-      localStorage.removeItem('draft_hana_message');
+      localStorage.removeItem('draft_aileen_name');
+      localStorage.removeItem('draft_aileen_email');
+      localStorage.removeItem('draft_aileen_subject');
+      localStorage.removeItem('draft_aileen_message');
 
       // Dismiss success alert automatically after 5 sec
       setTimeout(() => setToastMessage(null), 5000);
@@ -107,23 +112,123 @@ export default function Contact({ isDark }) {
   return (
     <section id="contact" className="py-20 md:py-24 relative overflow-hidden px-4 sm:px-6 lg:px-8">
       {/* Background soft pastel highlight orbs */}
-      <div className="absolute top-[40%] right-[10%] w-[420px] h-[420px] rounded-full filter blur-[150px] bg-peach opacity-35" />
+      <div className="absolute top-[45%] right-[10%] w-[380px] h-[380px] rounded-full filter blur-[150px] bg-peach opacity-30" />
 
-      {/* Structured grid */}
+      {/* Structured container */}
       <div className="max-w-7xl mx-auto relative z-10">
-        
+
         {/* Section title */}
-        <div className="text-center space-y-2 mb-16">
-          <p className="font-mono text-xs font-semibold uppercase tracking-widest text-hotpink">
-            07 / INQUIRIES & DEEP COLLABS
-          </p>
-          <h2 className={`text-3xl sm:text-4.5xl font-display font-medium tracking-tight ${isDark ? 'text-white' : 'text-gray-900'}`}>
-            Let's Build Something <span className="text-glow-pink text-hotpink font-semibold">Exquisite</span>
+        <div className="text-center space-y-2 mb-10">
+          <h2 className={`text-3xl sm:text-4.5xl font-display font-semibold tracking-tight ${isDark ? 'text-white' : 'text-gray-900'}`}>
+            Contact Me
           </h2>
-          <p className={`text-xs sm:text-sm font-light mt-2 max-w-lg mx-auto ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
-            Have an open-source pipeline, design mandate, or startup idea? Leave a line. Your layout drafts are securely compiled.
+          <p className={`text-sm font-light max-w-lg mx-auto leading-relaxed ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
+            Got a project in mind, a collaborative opportunity, or just want to say hello? Drop me a message and let's build something exquisite together!
           </p>
-          <div className="h-1 w-16 bg-hotpink rounded-full mx-auto mt-4" />
+          <div className="h-1 w-12 bg-hotpink rounded-full mx-auto mt-3" />
+        </div>
+
+        {/* Quick Contacts Bar: Email, LinkedIn, GitHub */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-2xl mx-auto mb-10">
+                    {/* Email */}
+                  {/* Email */}
+          <motion.a
+            id="link-contact-email"
+            href="https://mail.google.com/mail/?view=cm&fs=1&to=aileenlagura16@gmail.com&su=Hello%20Aileen"
+            target="_blank"
+            rel="noopener noreferrer"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            animate={{
+              y: [0, -5, 0, 5, 0],
+              rotate: [0, 2, 0, -2, 0],
+            }}
+            className={`flex flex-col items-center justify-center p-5 rounded-2xl border transition-all hover:scale-[1.02] ${
+              isDark
+                ? 'bg-white/5 border-white/10 hover:border-hotpink text-white hover:bg-white/10'
+                : 'bg-white/45 border-white/65 hover:border-hotpink shadow-sm text-gray-800 hover:bg-white'
+            }`}
+            style={{
+              animation: 'card-float 4s ease-in-out infinite',
+            }}
+          >
+            <motion.div
+              animate={{ y: [0, -3, 0, 3, 0], rotate: [0, 8, 0, -8, 0] }}
+              transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+            >
+              <Mail className="text-hotpink mb-2" size={20} />
+            </motion.div>
+            <span className="text-[10px] font-mono uppercase text-gray-400">Email Me</span>
+            <span className="text-xs font-semibold mt-1 max-w-full truncate">aileenlagura16@gmail.com</span>
+          </motion.a>
+          {/* LinkedIn */}
+          <motion.a
+            id="link-contact-linkedin"
+            href="https://www.linkedin.com/in/aileen-lagura-7006483a2/"
+            target="_blank"
+            rel="noopener noreferrer"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.15 }}
+            animate={{
+              y: [0, -5, 0, 5, 0],
+              rotate: [0, 2, 0, -2, 0],
+            }}
+            className={`flex flex-col items-center justify-center p-5 rounded-2xl border transition-all hover:scale-[1.02] ${
+              isDark
+                ? 'bg-white/5 border-white/10 hover:border-hotpink text-white hover:bg-white/10'
+                : 'bg-white/45 border-white/65 hover:border-hotpink shadow-sm text-gray-800 hover:bg-white'
+            }`}
+            style={{
+              animation: 'card-float 4.4s ease-in-out infinite',
+              animationDelay: '0.2s',
+            }}
+          >
+            <motion.div
+              animate={{ y: [0, -3, 0, 3, 0], rotate: [0, 8, 0, -8, 0] }}
+              transition={{ duration: 4.4, repeat: Infinity, ease: 'easeInOut', delay: 0.2 }}
+            >
+              <Linkedin className="text-hotpink mb-2" size={20} />
+            </motion.div>
+            <span className="text-[10px] font-mono uppercase text-gray-400">LinkedIn</span>
+            <span className="text-xs font-semibold mt-1">aileen-lagura</span>
+          </motion.a>
+          {/* GitHub */}
+          <motion.a
+            id="link-contact-github"
+            href="https://github.com/aileenlagura21"
+            target="_blank"
+            rel="noopener noreferrer"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            animate={{
+              y: [0, -5, 0, 5, 0],
+              rotate: [0, 2, 0, -2, 0],
+            }}
+            className={`flex flex-col items-center justify-center p-5 rounded-2xl border transition-all hover:scale-[1.02] ${
+              isDark
+                ? 'bg-white/5 border-white/10 hover:border-hotpink text-white hover:bg-white/10'
+                : 'bg-white/45 border-white/65 hover:border-hotpink shadow-sm text-gray-800 hover:bg-white'
+            }`}
+            style={{
+              animation: 'card-float 4.8s ease-in-out infinite',
+              animationDelay: '0.4s',
+            }}
+          >
+            <motion.div
+              animate={{ y: [0, -3, 0, 3, 0], rotate: [0, 8, 0, -8, 0] }}
+              transition={{ duration: 4.8, repeat: Infinity, ease: 'easeInOut', delay: 0.4 }}
+            >
+              <Github className="text-hotpink mb-2" size={20} />
+            </motion.div>
+            <span className="text-[10px] font-mono uppercase text-gray-400">GitHub</span>
+            <span className="text-xs font-semibold mt-1">aileenlagura</span>
+          </motion.a>
         </div>
 
         {/* Floating Custom Notification Toast Alerts inside contact section */}
@@ -158,226 +263,157 @@ export default function Contact({ isDark }) {
           </AnimatePresence>
         </div>
 
-        {/* Contact Layout Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 sm:gap-12 max-w-5xl mx-auto items-stretch">
-          
-          {/* Quick contact Details (Col span 5) */}
-          <div className={`lg:col-span-5 p-7 sm:p-8 rounded-[32px] border backdrop-blur-xl flex flex-col justify-between text-left ${
-            isDark 
-              ? 'bg-white/5 border-white/10 text-white' 
+        {/* Interactive Form intake */}
+        <form
+          onSubmit={handleSubmit}
+          className={`max-w-2xl mx-auto p-7 sm:p-8 rounded-[32px] border backdrop-blur-xl text-left flex flex-col gap-5 ${
+            isDark
+              ? 'bg-white/5 border-white/10'
               : 'bg-white/45 border-white/65 shadow-sm shadow-rose-100/5'
-          }`}>
-            <div className="space-y-6">
-              <h3 className={`text-lg sm:text-xl font-display font-semibold ${isDark ? 'text-gray-100' : 'text-gray-800'}`}>
-                Aileen Lagura's Desk
-              </h3>
-              <p className={`text-xs sm:text-sm leading-relaxed ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
-                Always open for premium creative partnerships, freelancing consulting, or coffee meetups.
+          }`}
+        >
+          {/* Name Input */}
+          <div className="space-y-2">
+            <label htmlFor="ct-name" className={`block text-xs font-mono font-semibold uppercase tracking-wider ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
+              Name
+            </label>
+            <input
+              id="ct-name"
+              type="text"
+              placeholder="Your Name"
+              value={name}
+              onChange={(e) => {
+                setName(e.target.value);
+                if (errors.name) setErrors(prev => ({ ...prev, name: undefined }));
+              }}
+              className={`w-full px-4 py-2.5 rounded-xl text-xs font-sans border backdrop-blur-md focus:ring-1 focus:outline-none transition-all ${
+                errors.name
+                  ? 'border-red-300 bg-red-50/25 focus:ring-red-400 focus:border-red-400'
+                  : isDark
+                  ? 'bg-white/5 border-white/10 focus:ring-hotpink focus:border-hotpink text-white'
+                  : 'bg-white/35 border-white/50 focus:ring-hotpink focus:border-hotpink text-gray-800'
+              }`}
+            />
+            {errors.name && (
+              <p className="text-[10px] text-red-500 font-mono flex items-center gap-1 mt-1">
+                <AlertCircle size={10} /> {errors.name}
               </p>
-
-              {/* Direct Info blocks */}
-              <div className="space-y-4">
-                
-                {/* Email block */}
-                <div className="flex items-center gap-3.5">
-                  <div className="w-9 h-9 rounded-full bg-white/40 dark:bg-white/5 border border-white/50 dark:border-white/10 backdrop-blur-md flex items-center justify-center text-hotpink shrink-0">
-                    <Mail size={15} />
-                  </div>
-                  <div>
-                    <span className="block text-[9px] font-mono uppercase text-gray-400 leading-none">Write Direct</span>
-                    <a
-                      id="link-contact-email"
-                      href="mailto:aileenlagura16@gmail.com"
-                      className="text-xs font-sans font-bold text-hotpink hover:underline"
-                    >
-                      aileenlagura16@gmail.com
-                    </a>
-                  </div>
-                </div>
-
-                {/* Location block */}
-                <div className="flex items-center gap-3.5">
-                  <div className="w-9 h-9 rounded-full bg-white/40 dark:bg-white/5 border border-white/50 dark:border-white/10 backdrop-blur-md flex items-center justify-center text-hotpink shrink-0">
-                    <MapPin size={15} />
-                  </div>
-                  <div>
-                    <span className="block text-[9px] font-mono uppercase text-gray-400 leading-none">Studio base</span>
-                    <span className={`text-xs font-sans font-bold ${isDark ? 'text-gray-200' : 'text-gray-700'}`}>
-                      Seoul, South Korea
-                    </span>
-                  </div>
-                </div>
-
-                {/* Clock / Language base */}
-                <div className="flex items-center gap-3.5">
-                  <div className="w-9 h-9 rounded-full bg-white/40 dark:bg-white/5 border border-white/50 dark:border-white/10 backdrop-blur-md flex items-center justify-center text-hotpink shrink-0">
-                    <Globe size={15} />
-                  </div>
-                  <div>
-                    <span className="block text-[9px] font-mono uppercase text-gray-400 leading-none">Time alignment</span>
-                    <span className={`text-xs font-sans ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
-                      KST (UTC+9) • Eng • Kor • Jpn
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Social handles links block */}
-            <div className="border-t border-pink-100/50 dark:border-plum-border/60 pt-6 mt-8 space-y-3">
-              <span className="block text-[10px] font-mono uppercase tracking-wider text-gray-400">Secure Channels</span>
-              <div className="flex gap-2">
-                {[
-                  { id: 'lnk-ct-github', icon: <Github size={14} />, label: 'GitHub', url: 'https://github.com' },
-                  { id: 'lnk-ct-linkedin', icon: <Linkedin size={14} />, label: 'LinkedIn', url: 'https://linkedin.com' },
-                  { id: 'lnk-ct-figma', icon: <Figma size={14} />, label: 'Figma', url: 'https://figma.com' },
-                ].map((sc) => (
-                  <a
-                    key={sc.id}
-                    id={sc.id}
-                    href={sc.url}
-                    target="_blank"
-                    rel="noreferrer"
-                    className={`flex items-center gap-1 py-1.5 px-3 rounded-full text-[10px] font-mono transition-all border backdrop-blur-md ${
-                      isDark
-                        ? 'border-white/10 hover:border-hotpink bg-white/5 text-gray-300 hover:text-hotpink'
-                        : 'border-white/50 hover:border-hotpink bg-white/35 shadow-sm text-gray-500 hover:text-hotpink'
-                    }`}
-                  >
-                    {sc.icon}
-                    <span>{sc.label}</span>
-                  </a>
-                ))}
-              </div>
-            </div>
+            )}
           </div>
 
-          {/* Interactive Form intake (Col span 7) */}
-          <form
-            onSubmit={handleSubmit}
-            className={`lg:col-span-7 p-7 sm:p-8 rounded-[32px] border backdrop-blur-xl text-left flex flex-col gap-5 ${
-              isDark 
-                ? 'bg-white/5 border-white/10' 
-                : 'bg-white/45 border-white/65 shadow-sm shadow-rose-100/5'
-            }`}
-          >
-            {/* Name Input */}
-            <div className="space-y-2">
-              <label htmlFor="ct-name" className={`block text-xs font-mono font-semibold uppercase tracking-wider ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
-                What should I call you?
-              </label>
-              <div className="relative">
-                <input
-                  id="ct-name"
-                  type="text"
-                  placeholder="e.g. Minji Park"
-                  value={name}
-                  onChange={(e) => {
-                    setName(e.target.value);
-                    if (errors.name) setErrors(prev => ({ ...prev, name: undefined }));
-                  }}
-                  className={`w-full px-4 py-2.5 rounded-xl text-xs font-sans border backdrop-blur-md focus:ring-1 focus:outline-none transition-all ${
-                    errors.name
-                      ? 'border-red-300 bg-red-50/25 focus:ring-red-400 focus:border-red-400'
-                      : isDark
-                      ? 'bg-white/5 border-white/10 focus:ring-hotpink focus:border-hotpink text-white'
-                      : 'bg-white/35 border-white/50 focus:ring-hotpink focus:border-hotpink text-gray-800'
-                  }`}
-                />
-              </div>
-              {errors.name && (
-                <p className="text-[10px] text-red-500 font-mono flex items-center gap-1 mt-1">
-                  <AlertCircle size={10} /> {errors.name}
-                </p>
+          {/* Email Input */}
+          <div className="space-y-2">
+            <label htmlFor="ct-email" className={`block text-xs font-mono font-semibold uppercase tracking-wider ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
+              Email
+            </label>
+            <input
+              id="ct-email"
+              type="text"
+              placeholder="your.email@domain.com"
+              value={email}
+              onChange={(e) => {
+                setEmail(e.target.value);
+                if (errors.email) setErrors(prev => ({ ...prev, email: undefined }));
+              }}
+              className={`w-full px-4 py-2.5 rounded-xl text-xs font-sans border backdrop-blur-md focus:ring-1 focus:outline-none transition-all ${
+                errors.email
+                  ? 'border-red-300 bg-red-50/25 focus:ring-red-400 focus:border-red-400'
+                  : isDark
+                  ? 'bg-white/5 border-white/10 focus:ring-hotpink focus:border-hotpink text-white'
+                  : 'bg-white/35 border-white/50 focus:ring-hotpink focus:border-hotpink text-gray-800'
+              }`}
+            />
+            {errors.email && (
+              <p className="text-[10px] text-red-500 font-mono flex items-center gap-1 mt-1">
+                <AlertCircle size={10} /> {errors.email}
+              </p>
+            )}
+          </div>
+
+          {/* Subject Input */}
+          <div className="space-y-2">
+            <label htmlFor="ct-subject" className={`block text-xs font-mono font-semibold uppercase tracking-wider ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
+              Subject
+            </label>
+            <input
+              id="ct-subject"
+              type="text"
+              placeholder="Subject"
+              value={subject}
+              onChange={(e) => {
+                setSubject(e.target.value);
+                if (errors.subject) setErrors(prev => ({ ...prev, subject: undefined }));
+              }}
+              className={`w-full px-4 py-2.5 rounded-xl text-xs font-sans border backdrop-blur-md focus:ring-1 focus:outline-none transition-all ${
+                errors.subject
+                  ? 'border-red-300 bg-red-50/25 focus:ring-red-400 focus:border-red-400'
+                  : isDark
+                  ? 'bg-white/5 border-white/10 focus:ring-hotpink focus:border-hotpink text-white'
+                  : 'bg-white/35 border-white/50 focus:ring-hotpink focus:border-hotpink text-gray-800'
+              }`}
+            />
+            {errors.subject && (
+              <p className="text-[10px] text-red-500 font-mono flex items-center gap-1 mt-1">
+                <AlertCircle size={10} /> {errors.subject}
+              </p>
+            )}
+          </div>
+
+          {/* Message Input */}
+          <div className="space-y-2">
+            <label htmlFor="ct-message" className={`block text-xs font-mono font-semibold uppercase tracking-wider ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
+              Message
+            </label>
+            <textarea
+              id="ct-message"
+              rows={5}
+              placeholder="Type your message here..."
+              value={message}
+              onChange={(e) => {
+                setMessage(e.target.value);
+                if (errors.message) setErrors(prev => ({ ...prev, message: undefined }));
+              }}
+              className={`w-full px-4 py-3 rounded-xl text-xs font-sans border backdrop-blur-md focus:ring-1 focus:outline-none transition-all resize-none ${
+                errors.message
+                  ? 'border-red-300 bg-red-50/25 focus:ring-red-400 focus:border-red-400'
+                  : isDark
+                  ? 'bg-white/5 border-white/10 focus:ring-hotpink focus:border-hotpink text-white'
+                  : 'bg-white/35 border-white/50 focus:ring-hotpink focus:border-hotpink text-gray-800'
+              }`}
+            />
+            {errors.message && (
+              <p className="text-[10px] text-red-500 font-mono flex items-center gap-1 mt-1">
+                <AlertCircle size={10} /> {errors.message}
+              </p>
+            )}
+          </div>
+
+          {/* Form actions */}
+          <div className="pt-2 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <span className="text-[10px] text-gray-400 font-mono leading-tight">
+              🔒 Protected client-side storage
+            </span>
+
+            <button
+              id="btn-contact-submit"
+              type="submit"
+              disabled={isSubmitting}
+              className="px-6.5 py-3 rounded-xl bg-hotpink text-white text-xs font-sans font-bold uppercase tracking-wider hover:bg-hotpink/95 active:scale-95 disabled:opacity-75 disabled:scale-100 cursor-pointer transition-all flex items-center justify-center gap-2 shadow-sm"
+            >
+              {isSubmitting ? (
+                <>
+                  <div className="w-3.5 h-3.5 rounded-full border-2 border-white/30 border-t-white animate-spin" />
+                  <span>Sending Message...</span>
+                </>
+              ) : (
+                <>
+                  <span>Send Message</span>
+                  <Send size={12} />
+                </>
               )}
-            </div>
-
-            {/* Email Input */}
-            <div className="space-y-2">
-              <label htmlFor="ct-email" className={`block text-xs font-mono font-semibold uppercase tracking-wider ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
-                Where can I text you? (Email Address)
-              </label>
-              <input
-                id="ct-email"
-                type="text"
-                placeholder="e.g. minji.park@domain.io"
-                value={email}
-                onChange={(e) => {
-                  setEmail(e.target.value);
-                  if (errors.email) setErrors(prev => ({ ...prev, email: undefined }));
-                }}
-                className={`w-full px-4 py-2.5 rounded-xl text-xs font-sans border backdrop-blur-md focus:ring-1 focus:outline-none transition-all ${
-                  errors.email
-                    ? 'border-red-300 bg-red-50/25 focus:ring-red-400 focus:border-red-400'
-                    : isDark
-                    ? 'bg-white/5 border-white/10 focus:ring-hotpink focus:border-hotpink text-white'
-                    : 'bg-white/35 border-white/50 focus:ring-hotpink focus:border-hotpink text-gray-800'
-                }`}
-              />
-              {errors.email && (
-                <p className="text-[10px] text-red-500 font-mono flex items-center gap-1 mt-1">
-                  <AlertCircle size={10} /> {errors.email}
-                </p>
-              )}
-            </div>
-
-            {/* Message input */}
-            <div className="space-y-2">
-              <label htmlFor="ct-message" className={`block text-xs font-mono font-semibold uppercase tracking-wider ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
-                Project Scope Narrative
-              </label>
-              <textarea
-                id="ct-message"
-                rows={4}
-                placeholder="Tell me a bit about your brand goals, required services, milestones, and timeline parameters..."
-                value={message}
-                onChange={(e) => {
-                  setMessage(e.target.value);
-                  if (errors.message) setErrors(prev => ({ ...prev, message: undefined }));
-                }}
-                className={`w-full px-4 py-3 rounded-xl text-xs font-sans border backdrop-blur-md focus:ring-1 focus:outline-none transition-all resize-none ${
-                  errors.message
-                    ? 'border-red-300 bg-red-50/25 focus:ring-red-400 focus:border-red-400'
-                    : isDark
-                    ? 'bg-white/5 border-white/10 focus:ring-hotpink focus:border-hotpink text-white'
-                    : 'bg-white/35 border-white/50 focus:ring-hotpink focus:border-hotpink text-gray-800'
-                }`}
-              />
-              {errors.message && (
-                <p className="text-[10px] text-red-500 font-mono flex items-center gap-1 mt-1">
-                  <AlertCircle size={10} /> {errors.message}
-                </p>
-              )}
-            </div>
-
-            {/* Form actions */}
-            <div className="pt-2 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-              <span className="text-[10px] text-gray-400 font-mono leading-tight">
-                🔒 Protected client-side storage
-              </span>
-              
-              <button
-                id="btn-contact-submit"
-                type="submit"
-                disabled={isSubmitting}
-                className="px-6.5 py-3 rounded-xl bg-hotpink text-white text-xs font-sans font-bold uppercase tracking-wider hover:bg-hotpink/95 active:scale-95 disabled:opacity-75 disabled:scale-100 cursor-pointer transition-all flex items-center justify-center gap-2 shadow-sm"
-              >
-                {isSubmitting ? (
-                  <>
-                    <div className="w-3.5 h-3.5 rounded-full border-2 border-white/30 border-t-white animate-spin" />
-                    <span>Writing Logs...</span>
-                  </>
-                ) : (
-                  <>
-                    <span>Submit Inquiry</span>
-                    <Send size={12} />
-                  </>
-                )}
-              </button>
-            </div>
-          </form>
-
-        </div>
+            </button>
+          </div>
+        </form>
 
       </div>
     </section>

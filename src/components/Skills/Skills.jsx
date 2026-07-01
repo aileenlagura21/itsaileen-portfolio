@@ -3,58 +3,72 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { useState } from 'react';
 import { motion } from 'motion/react';
-import { Cpu, FileCode, Layers, Waves, Zap, Grid, HeartHandshake, Type, Compass, Package, PenTool, Feather, Image, Sparkles, GitBranch, Terminal } from 'lucide-react';
-import { SKILLS } from '../../data/index.js';
-import './Skills.css';
-
-// Help map icons visually to match skills list
-function getSkillIcon(iconName, className) {
-  switch (iconName) {
-    case 'Cpu':
-      return <Cpu className={className} size={15} />;
-    case 'FileCode':
-      return <FileCode className={className} size={15} />;
-    case 'Layers':
-      return <Layers className={className} size={15} />;
-    case 'Waves':
-      return <Waves className={className} size={15} />;
-    case 'Zap':
-      return <Zap className={className} size={15} />;
-    case 'Grid':
-      return <Grid className={className} size={15} />;
-    case 'HeartHandshake':
-      return <HeartHandshake className={className} size={15} />;
-    case 'Type':
-      return <Type className={className} size={15} />;
-    case 'Compass':
-      return <Compass className={className} size={15} />;
-    case 'Package':
-      return <Package className={className} size={15} />;
-    case 'PenTool':
-      return <PenTool className={className} size={15} />;
-    case 'Feather':
-      return <Feather className={className} size={15} />;
-    case 'Image':
-      return <Image className={className} size={15} />;
-    case 'Sparkles':
-      return <Sparkles className={className} size={15} />;
-    case 'GitBranch':
-      return <GitBranch className={className} size={15} />;
-    default:
-      return <Terminal className={className} size={15} />;
-  }
-}
+import {
+  FileCode,
+  Layers,
+  Code,
+  Cpu,
+  Waves,
+  Server,
+  Coffee,
+  Database,
+  Terminal,
+  Laptop,
+  GitBranch,
+  PenTool,
+  Code2
+} from 'lucide-react';
 
 export default function Skills({ isDark }) {
-  const [activeCategory, setActiveCategory] = useState('Frontend');
+  // Define tech stack items with custom colors and icons
+  const frontendStack = [
+    { name: 'HTML5', icon: <FileCode className="text-orange-500" size={20} />, bgColor: 'bg-orange-500/10' },
+    { name: 'CSS3', icon: <Layers className="text-blue-500" size={20} />, bgColor: 'bg-blue-500/10' },
+    { name: 'JavaScript', icon: <Code className="text-amber-500" size={20} />, bgColor: 'bg-amber-500/10' },
+    { name: 'TypeScript', icon: <Code2 className="text-sky-500" size={20} />, bgColor: 'bg-sky-500/10' },
+    { name: 'React / React Native', icon: <Cpu className="text-cyan-500" size={20} />, bgColor: 'bg-cyan-500/10' },
+     ];
 
-  const filteredSkills = SKILLS.filter((item) => item.category === activeCategory);
+  const backendStack = [
+    { name: 'PHP', icon: <Server className="text-indigo-500" size={20} />, bgColor: 'bg-indigo-500/10' },
+    { name: 'C++', icon: <Cpu className="text-hotpink" size={20} />, bgColor: 'bg-hotpink/10' },
+    { name: 'Java', icon: <Coffee className="text-amber-700" size={20} />, bgColor: 'bg-amber-700/10' },
+  ];
 
-  // Constants for circular indicators
-  const radius = 32;
-  const circumference = 2 * Math.PI * radius;
+  const databaseStack = [
+    { name: 'MySQL Database', icon: <Database className="text-blue-650 text-blue-500" size={20} />, bgColor: 'bg-blue-500/10' },
+  ];
+
+  const toolsStack = [
+    { name: 'Visual Studio Code', icon: <Terminal className="text-sky-600" size={20} />, bgColor: 'bg-sky-600/10' },
+    { name: 'IntelliJ IDEA', icon: <Laptop className="text-red-500" size={20} />, bgColor: 'bg-red-500/10' },
+    { name: 'Git & GitHub', icon: <GitBranch className="text-orange-600" size={20} />, bgColor: 'bg-orange-600/10' },
+    { name: 'Figma', icon: <PenTool className="text-purple-500" size={20} />, bgColor: 'bg-purple-500/10' },
+  ];
+
+  const categories = [
+    {
+      title: 'Frontend Development',
+      description: 'Building beautiful, highly intuitive, and responsive interfaces with clean layout semantics and smooth motion physics.',
+      items: frontendStack,
+    },
+    {
+      title: 'Backend Systems & Logic',
+      description: 'Formulating structured server behaviors, processing client queries securely, and working with compiled core systems.',
+      items: backendStack,
+    },
+    {
+      title: 'Database Management',
+      description: 'Enforcing relational integrity, schema normalization constraints, physical storage indexing, and rapid transaction auditing.',
+      items: databaseStack,
+    },
+    {
+      title: 'Tools & Ecosystem',
+      description: 'Leveraging professional integrated development environments, version control pipelines, and real-time design canvases.',
+      items: toolsStack,
+    },
+  ];
 
   return (
     <section
@@ -63,181 +77,89 @@ export default function Skills({ isDark }) {
         isDark ? 'bg-plum-dark/40' : 'bg-peach/10'
       }`}
     >
+      {/* Background ambient orbs */}
       <div className="absolute bottom-[10%] left-[5%] w-60 h-60 rounded-full filter blur-[120px] bg-pastelpink opacity-30 pointer-events-none" />
+      <div className="absolute top-[20%] right-[5%] w-72 h-72 rounded-full filter blur-[140px] bg-peach opacity-20 pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        
+
         {/* Section title */}
-        <div className="text-center space-y-2 mb-12">
+        <div className="text-center space-y-3 mb-16">
           <p className="font-mono text-xs font-semibold uppercase tracking-widest text-hotpink">
-            04 / TOOLKIT CAPABILITIES
+            04 / EXPERTISE DISCIPLINE
           </p>
-          <h2 className={`text-3xl sm:text-4.5xl font-display font-medium tracking-tight ${isDark ? 'text-white' : 'text-gray-900'}`}>
-            Bespoke <span className="text-hotpink font-semibold">Competence Matrix</span>
+          <h2 className={`text-3xl sm:text-4.5xl font-display font-semibold tracking-tight ${isDark ? 'text-white' : 'text-gray-900'}`}>
+            My Tech Stack
           </h2>
-          <div className="h-1 w-16 bg-hotpink rounded-full mx-auto mt-4" />
+          <p className={`text-sm font-light mt-3 max-w-xl mx-auto leading-relaxed ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
+            A comprehensive, modular collection of web development techniques, logical server programming languages, robust data storages, and precision tools I utilize to craft complete software experiences.
+          </p>
+          <div className="h-1 w-12 bg-hotpink rounded-full mx-auto mt-4" />
         </div>
 
-        {/* Categories togglers */}
-        <div className="flex justify-center mb-12">
-          <div className={`p-1.5 rounded-full flex gap-1 border backdrop-blur-md ${
-            isDark ? 'bg-white/5 border-white/10' : 'bg-white/35 border-white/50 shadow-sm shadow-rose-100/5'
-          }`}>
-            {['Frontend', 'Design', 'Software'].map((cat) => (
-              <button
-                key={cat}
-                id={`btn-skill-cat-${cat.toLowerCase()}`}
-                onClick={() => setActiveCategory(cat)}
-                className={`px-5 sm:px-7 py-2 rounded-full font-sans text-xs font-semibold tracking-wider uppercase transition-all cursor-pointer ${
-                  activeCategory === cat
-                    ? 'bg-hotpink text-white shadow-sm'
-                    : isDark
-                    ? 'text-gray-400 hover:text-gray-200'
-                    : 'text-gray-500 hover:text-hotpink'
-                }`}
-              >
-                {cat === 'Frontend' 
-                  ? 'Dev Architecture' 
-                  : cat === 'Design' 
-                  ? 'Layout Philosophy' 
-                  : 'Design Software'}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* Dynamic Display Layout */}
-        <div className="max-w-4xl mx-auto min-h-[300px]">
-          {activeCategory === 'Frontend' && (
-            <div className="space-y-6 sm:space-y-8">
-              {filteredSkills.map((skill, idx) => (
-                <div key={skill.name} className="space-y-2 text-left">
-                  <div className="flex items-center justify-between text-xs sm:text-sm">
-                    <span className={`font-sans font-semibold flex items-center gap-2 ${isDark ? 'text-gray-200' : 'text-gray-700'}`}>
-                      <span className="text-hotpink shrink-0">{getSkillIcon(skill.iconName, 'text-hotpink')}</span>
-                      {skill.name}
-                    </span>
-                    <span className="font-mono font-bold text-hotpink">{skill.percentage}%</span>
-                  </div>
-                  
-                  {/* Sliding Progress bar frame */}
-                  <div className={`w-full h-3 rounded-full overflow-hidden ${
-                    isDark ? 'bg-plum-border/60' : 'bg-pink-100/40 border border-pink-150/10'
-                  }`}>
-                    <motion.div
-                      initial={{ width: 0 }}
-                      whileInView={{ width: `${skill.percentage}%` }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.8, delay: idx * 0.1, ease: 'easeOut' }}
-                      className={`h-full rounded-full bg-gradient-to-r from-softrose via-hotpink to-[#ff8fab]`}
-                    />
-                  </div>
+        {/* Tech Stack Bento Grid Groups */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto text-left">
+          {categories.map((category, catIdx) => (
+            <motion.div
+              key={category.title}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: catIdx * 0.1 }}
+              className={`p-6 sm:p-7 rounded-[32px] border backdrop-blur-xl flex flex-col justify-between transition-all hover:scale-[1.01] ${
+                isDark
+                  ? 'bg-white/5 border-white/10 text-white'
+                  : 'bg-white/45 border-white/65 shadow-sm shadow-rose-100/5 text-gray-800'
+              }`}
+            >
+              <div className="space-y-4">
+                {/* Category Header */}
+                <div>
+                  <h3 className={`text-lg font-display font-semibold ${isDark ? 'text-gray-100' : 'text-gray-900'}`}>
+                    {category.title}
+                  </h3>
+                  <p className={`text-xs mt-1.5 font-light leading-relaxed ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
+                    {category.description}
+                  </p>
                 </div>
-              ))}
-            </div>
-          )}
 
-          {activeCategory === 'Design' && (
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 text-left">
-              {filteredSkills.map((skill, idx) => (
-                <motion.div
-                  key={skill.name}
-                  initial={{ opacity: 0, y: 15 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: idx * 0.08 }}
-                  className={`p-5 rounded-2xl border flex items-start gap-4 backdrop-blur-md transition-all hover:scale-101 ${
-                    isDark
-                      ? 'bg-white/5 border-white/10 text-white hover:border-hotpink/30'
-                      : 'bg-white/40 border-white/60 text-gray-800 hover:border-hotpink/20 shadow-sm shadow-rose-100/5'
-                  }`}
-                >
-                  <div className="w-9 h-9 rounded-full bg-peach flex items-center justify-center text-hotpink shrink-0 mt-0.5">
-                    {getSkillIcon(skill.iconName, 'text-hotpink')}
-                  </div>
-                  <div className="space-y-1.5 flex-1">
-                    <div className="flex items-center justify-between">
-                      <h4 className="text-sm font-display font-semibold">{skill.name}</h4>
-                      <span className="font-mono text-[10px] text-hotpink font-bold">{skill.percentage}%</span>
-                    </div>
-                    
-                    {/* Method status meter */}
-                    <div className="h-1 bg-pink-100/60 dark:bg-plum-border rounded-full overflow-hidden">
-                      <div className="h-full bg-hotpink rounded-full" style={{ width: `${skill.percentage}%` }} />
-                    </div>
-                    <p className="text-[10px] text-gray-400">Validated through collaborative system setups and client feedback audits.</p>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          )}
-
-          {activeCategory === 'Software' && (
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6">
-              {filteredSkills.map((skill, idx) => {
-                const strokeOffset = circumference - (skill.percentage / 100) * circumference;
-                return (
-                  <motion.div
-                    key={skill.name}
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: idx * 0.05 }}
-                    className={`p-5 rounded-2xl border flex flex-col items-center text-center justify-between gap-4 h-48 backdrop-blur-md transition-all hover:-translate-y-1 ${
-                      isDark 
-                        ? 'bg-white/5 border-white/10' 
-                        : 'bg-white/40 border-white/60 shadow-sm shadow-rose-100/5'
-                    }`}
-                  >
-                    {/* SVG circular indicator */}
-                    <div className="relative w-20 h-20 flex items-center justify-center">
-                      <svg className="w-full h-full transform -rotate-92">
-                        {/* Background structural trail tracking */}
-                        <circle
-                          cx="40"
-                          cy="40"
-                          r={radius}
-                          className="stroke-pink-100 dark:stroke-plum-border"
-                          strokeWidth="5"
-                          fill="transparent"
-                        />
-                        {/* Interactive glow ring */}
-                        <motion.circle
-                          cx="40"
-                          cy="40"
-                          r={radius}
-                          className="stroke-hotpink"
-                          strokeWidth="5.5"
-                          strokeDasharray={circumference}
-                          initial={{ strokeDashoffset: circumference }}
-                          whileInView={{ strokeDashoffset: strokeOffset }}
-                          viewport={{ once: true }}
-                          transition={{ duration: 1, delay: idx * 0.1, ease: 'easeOut' }}
-                          strokeLinecap="round"
-                          fill="transparent"
-                        />
-                      </svg>
-                      {/* Metric Percentage in-circle copy */}
-                      <span className="absolute text-xs font-mono font-extrabold text-hotpink">
-                        {skill.percentage}%
+                {/* Picture and Name Grid ("i just want the picture then name okay") */}
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-2">
+                  {category.items.map((item, itemIndex) => (
+                    <div
+                      key={item.name}
+                      className={`flex flex-col items-center justify-center p-3.5 rounded-2xl border text-center gap-2.5 transition-all duration-300 hover:scale-105 ${
+                        isDark
+                          ? 'bg-white/5 border-white/5 hover:border-hotpink/40 hover:bg-white/10'
+                          : 'bg-white/40 border-white/50 shadow-sm shadow-rose-100/10 hover:border-hotpink/30 hover:bg-white'
+                      }`}
+                    >
+                      {/* Logo / Icon representation ("the picture") */}
+                      <motion.div
+                        className={`w-10 h-10 rounded-full flex items-center justify-center ${item.bgColor}`}
+                        animate={{
+                          y: [0, -4, 0, 4, 0],
+                          rotate: [0, 6, 0, -6, 0],
+                        }}
+                        transition={{
+                          duration: 4 + (itemIndex * 0.4),
+                          repeat: Infinity,
+                          ease: 'easeInOut',
+                          delay: itemIndex * 0.2,
+                        }}
+                      >
+                        {item.icon}
+                      </motion.div>
+                      {/* Tool name ("the name") */}
+                      <span className={`text-[11px] font-mono font-bold tracking-tight uppercase leading-tight ${isDark ? 'text-gray-200' : 'text-gray-700'}`}>
+                        {item.name}
                       </span>
                     </div>
-
-                    <div className="space-y-1.5">
-                      <div className="flex items-center justify-center gap-1.5 text-[10px] font-semibold text-gray-400">
-                        {getSkillIcon(skill.iconName, 'text-hotpink shrink-0')}
-                        <span className="uppercase font-mono tracking-widest text-[8px]">Daily Core</span>
-                      </div>
-                      <h4 className={`text-xs font-sans font-bold tracking-tight ${isDark ? 'text-gray-200' : 'text-gray-700'}`}>
-                        {skill.name.split(' ')[0]}
-                      </h4>
-                    </div>
-
-                  </motion.div>
-                );
-              })}
-            </div>
-          )}
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+          ))}
         </div>
 
       </div>

@@ -1,5 +1,4 @@
 /* Animation keyframes */
-
 /* Floating animation for hero graphics */
 @keyframes float {
   0%, 100% {
@@ -9,7 +8,6 @@
     transform: translateY(-15px) rotate(3deg);
   }
 }
-
 @keyframes float-slower {
   0%, 100% {
     transform: translateY(0px) rotate(0deg);
@@ -18,7 +16,14 @@
     transform: translateY(-20px) rotate(-4deg);
   }
 }
-
+@keyframes card-float {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(1.5deg);
+  }
+}
 @keyframes flow-gradient {
   0% {
     background-position: 0% 50%;
@@ -30,15 +35,15 @@
     background-position: 0% 50%;
   }
 }
-
 .animate-floating {
   animation: float 6s ease-in-out infinite;
 }
-
 .animate-floating-slower {
   animation: float-slower 8s ease-in-out infinite;
 }
-
+.animate-card-floating {
+  animation: card-float 5s ease-in-out infinite;
+}
 .animate-flow {
   background-size: 200% 200%;
   animation: flow-gradient 10s ease infinite;

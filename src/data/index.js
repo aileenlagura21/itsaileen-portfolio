@@ -3,288 +3,564 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-/**
- * @typedef {Object} Project
- * @property {string} id
- * @property {string} title
- * @property {string} subtitle
- * @property {string} description
- * @property {string} longDescription
- * @property {string} image
- * @property {string} category
- * @property {string[]} tags
- * @property {string[]} tools
- * @property {string} client
- * @property {string} date
- * @property {string} liveUrl
- * @property {string} githubUrl
- * @property {string} role
- * @property {string[]} features
- * @property {string[]} [gallery]
- * @property {string[]} [galleryTitles]
- */
+// Let's import the specific images that were generated.
+// We'll define paths relative to Vite assets directory or as direct paths. Because they are in the filesystem:
+// /src/assets/images/aileenprofile.jpg
+// /src/assets/images/project_webux_1779523344332.png
+// /src/assets/images/project_mobile_1779523362772.png
+// /src/assets/images/project_brand_1779523386945.png
 
-/**
- * @typedef {Object} Service
- * @property {string} id
- * @property {string} title
- * @property {string} description
- * @property {string} detailedInfo
- * @property {string} iconName
- * @property {string} accentColor
- * @property {string} pastelBg
- */
-
-/**
- * @typedef {Object} Skill
- * @property {string} name
- * @property {string} category
- * @property {number} percentage
- * @property {string} iconName
- * @property {string} accent
- */
-
-/**
- * @typedef {Object} TimelineItem
- * @property {string} id
- * @property {string} year
- * @property {string} period
- * @property {string} title
- * @property {string} organization
- * @property {string} location
- * @property {string} description
- * @property {string[]} tags
- * @property {string} type
- */
-
-/**
- * @typedef {Object} Testimonial
- * @property {string} id
- * @property {string} name
- * @property {string} role
- * @property {string} company
- * @property {string} text
- * @property {string} avatarUrl
- * @property {number} rating
- */
-
-export const AVATAR_URL = '/src/assets/images/hana_profile_1779523320680.png';
+export const AVATAR_URL = '/src/assets/images/aileenprofile.jpg';
 
 export const PROJECTS = [
   {
-    id: 'athenaeum-digital',
-    title: 'Athenaeum Digital',
-    subtitle: 'Library Management & Catalog Platform',
-    description: 'An elegant library catalog and circulation system featuring live status monitors, search tools, student tracking, and fine-grain administration controls.',
-    longDescription: 'Athenaeum Digital redefines administrative software through a calm, warm editorial aesthetic. Seamlessly integrating complex state-flows, this platform allows students to check book availability, borrow volumes safely, and track return deadlines. It features a complete control dashboard where library managers can track real-time transactional logs, add or remove catalogue entries, monitor system health, and export critical system metrics instantly.',
-    image: '/src/assets/images/athenaeum_digital_mockup_1780313202452.png',
-    category: 'development',
-    tags: ['Full-Stack', 'Interactive UI', 'State Flow', 'Admin Console'],
-    tools: ['React', 'Express', 'Tailwind CSS', 'Vite', 'TypeScript'],
-    client: 'Bohol Island State University - Bilar Campus',
-    date: 'May 2026',
-    liveUrl: 'https://athenaeum.example.com',
-    githubUrl: 'https://github.com/aileenlagura/athenaeum-digital',
-    role: 'Full-Stack Developer & UI Architect',
-    features: [
-      'Interactive real-time catalog search filtering dynamically by genre, title, author, or ISBN code.',
-      'Two distinct user environments: Student Portal (circulation, active books checklists, reminders) and Administrator Control Console.',
-      'Automated transactional log mechanism tracking borrowings, returns, and real-time live stock countdowns.',
-      'Robust administrative console with manual book addition forms, database health indicators, and CSV metric exports.'
-    ],
-    gallery: [
-      '/src/assets/images/athenaeum_digital_mockup_1780313202452.png',
-      '/src/assets/images/athenaeum_student_catalog_1780313529778.png',
-      '/src/assets/images/athenaeum_borrow_success_1780313549478.png',
-      '/src/assets/images/athenaeum_admin_dashboard_1780313565993.png'
-    ],
-    galleryTitles: [
-      'Administrative Catalog Management Console',
-      'Student Catalog & Personalized Circulation Board',
-      'Interactive Real-time Borrowing Success Flow',
-      'Management Statistics & Book Insertion Dialog'
-    ]
-  },
-  {
-    id: 'aura-skincare',
-    title: 'Aura Skincare',
-    subtitle: 'Minimalist E-Commerce Platform',
-    description: 'A beautiful, organic shopping experience celebrating clean ingredients, soft tone gradients, and delicate typography.',
-    longDescription: 'Aura Skincare redefines organic commerce through an immersive digital boutique. Guided by soft pink and beige color pallets, the layout prioritizes gentle product discovery, highly accessible ingredients pages, and a seamless, high-performance checkout flow built on React. We achieved a 40% reduction in bounce rate by replacing traditional crowded item pages with airy, high-contrast, editorial storytelling slides.',
-    image: '/src/assets/images/project_webux_1779523344332.png',
+  id: 'fsg-platform',
+  title: 'FSG - Financial Statement Generator (Web Based Platform)',
+  subtitle: 'Automated Financial Reporting & Business Analytics Platform',
+  description: 'A comprehensive web-based financial management platform that automates the generation of financial statements, tracks multi-business performance, and streamlines accounting workflows for administrators and analysts.',
+  longDescription: 'Developed a full-stack financial statement generator designed to help businesses automate routine accounting tasks, surface actionable financial trends, and deliver compliant reports. The system features a centralized executive dashboard for real-time profit, sales, and expense tracking, alongside comprehensive bookkeeping modules and robust user management tailored for diverse business classifications.',
+  image:  '/src/assets/images/fsg1.png',
+  category: 'web',
+  tags: ['Financial Technology', 'Automated Reporting', 'Data Analytics', 'Bookkeeping', 'Web Application'],
+  tools: ['React', 'TypeScript', 'Node.js', 'MySQL'],
+  client: 'Collaborative Academic Project – Bohol Island State University (Bilar Campus)',
+  date: 'January 2026',
+  liveUrl: 'https://fsg.bisubilar.org/',
+  githubUrl: '#',
+  role: 'System Analyst (Phase 2)',
+  features: [
+    'Executive Dashboard & Analytics: Real-time visualization of total profit, sales, and expenses across multiple tracked businesses, featuring performance overview charts, profit distribution metrics, and dynamic business snapshot tables.',
+    'Comprehensive Bookkeeping Modules: Fully functional General Journal, General Ledger, and Cash Book systems with automated entry tracking, advanced filtering by period (monthly, quarterly, yearly), and business-specific data views.',
+    'Automated Financial Reporting: One-click generation of Income Statements, Cash Flow statements, and Statements of Financial Position, featuring native PDF and Excel export capabilities for seamless stakeholder distribution.',
+    'Multi-Business & User Management: Secure administrative portal to manage diverse client profiles and transactions, supporting various business classifications (merchandising, service concern, manufacturing, hybrid) with complete CRUD operations.',
+    'Dynamic Business Snapshot & Tracking: Interactive data tables displaying granular sales, expenses, and profit margins per business entity, allowing administrators to quickly identify high-performing ventures and monitor overall portfolio health.'
+  ],
+  gallery: [
+    '/src/assets/images/fsg1.png',
+    '/src/assets/images/fsg2.png',
+    '/src/assets/images/fsg3.png',
+    '/src/assets/images/fsg4.png',
+    '/src/assets/images/fsg5.png',
+    '/src/assets/images/fsg6.png',
+    '/src/assets/images/fsg7.png',
+    '/src/assets/images/fsg8.png',
+    '/src/assets/images/fsg9.png',
+    '/src/assets/images/fsg11.png',
+    '/src/assets/images/fsg12.png',
+    '/src/assets/images/fsg13.png'
+    
+  ],
+  galleryTitles: [
+    'Landing Page',
+    'Team',
+    'Dashboard Overview with Real-Time Profit Analytics',
+    'Dashboard Overview with Real-Time Profit Analytics',
+    'Books of Accounts',
+    'General Journal with Period Filtering and Export Tools',
+    'General Ledger with Multi-Business Transaction Tracking',
+    'Reports',
+    'Financial Position Statement with Export Options',
+    'Statement of Cash Flow with Export Options',
+    'Statement of Financial Position with Export Options',
+    'Users Management'
+
+  ]
+},
+{
+  id: 'fsg-mobile-app',
+  title: 'FSG Mobile - Financial Statement Generator',
+  subtitle: 'Mobile Financial Management & Business Analytics App',
+  description: 'A comprehensive mobile financial management application built with Flutter, designed for business owners and users to monitor their financial performance, track transactions, and generate reports on-the-go with real-time database synchronization.',
+  longDescription: 'Developed a native mobile companion application for the Financial Statement Generator platform using Flutter, empowering business owners and regular users to access their financial data anytime, anywhere. Unlike the web platform which serves administrators, this mobile app provides individual business users with personalized access to their own financial statements, journal entries, and performance analytics. The app connects directly to the centralized FSG database, ensuring real-time data consistency across all platforms while maintaining secure user authentication and role-based access controls.',
+  image: '/src/assets/images/fsgmobile.png',
+  category: 'mobile',
+  tags: ['Mobile Development', 'Expo Go', 'Financial Technology', 'Real-Time Sync', 'Business Analytics'],
+  tools: ['Expo Go', 'Dart', 'Firebase', 'RESTful API', 'SQLite'],
+  client: 'Collaborative Academic Project – Bohol Island State University (Bilar Campus)',
+  date: 'January 2026',
+  liveUrl: '#',
+  githubUrl: '#',
+  role: 'System Analyst (Phase 2)',
+  features: [
+    'Personalized Business Dashboard: Secure login system that automatically detects authenticated users and displays their specific business financial data including real-time profit, sales, and expense metrics. Each user sees only their own business information with personalized performance charts and trend analytics.',
+    'Mobile Journal & Ledger Access: Complete access to General Journal, General Ledger, and Cash Book entries for the user\'s own business. Features intuitive mobile-optimized interfaces for viewing transaction history, filtering by date ranges, and exporting entries to PDF or Excel formats.',
+    'On-Demand Financial Reports: Generate and view Income Statements, Cash Flow statements, and Statements of Financial Position directly from mobile device. Reports are automatically calculated from the user\'s transaction data and can be downloaded or shared with stakeholders via email or messaging apps.',
+    'Real-Time Database Synchronization: Seamless connection to the centralized FSG web database ensures all financial data is instantly synchronized across platforms. When administrators update records in the web system, mobile users see the changes immediately without manual refresh.',
+    'Secure User Authentication & Role-Based Access: Implements secure login with email verification and role-based permissions ensuring users can only access their own business data. The system prevents unauthorized access to other businesses\' financial information while maintaining data privacy and compliance.',
+    'Offline-First Architecture with Auto-Sync: Built with offline capabilities allowing users to view cached financial data even without internet connection. The app automatically syncs new transactions and updates when connectivity is restored, ensuring data consistency across all devices.'
+  ],
+  gallery: [
+    '/src/assets/images/fsgmobile1.1.png',
+    '/src/assets/images/fsgmobile1.jpg',
+    '/src/assets/images/fsgmobile2.jpg',
+    '/src/assets/images/fsgmobile3.jpg',
+    '/src/assets/images/fsgmobile4.jpg',
+    '/src/assets/images/fsgmobile5.jpg',
+    '/src/assets/images/fsgmobile6.jpg',
+    '/src/assets/images/fsgmobile7.jpg',
+    '/src/assets/images/fsgmobile8.jpg',
+    '/src/assets/images/fsgmobile9.jpg',
+    '/src/assets/images/fsgmobile10.jpg',
+    '/src/assets/images/fsgmobile11.jpg',
+    '/src/assets/images/fsgmobile12.jpg',
+    '/src/assets/images/fsgmobile13.jpg',
+    '/src/assets/images/fsgmobile14.jpg'
+   
+  ],
+  galleryTitles: [
+    'Landing Page',
+    'Sign In',
+    'Dashboard',
+    'Dashboard',
+    'Add Entry',
+     'General Ledger',
+     'General Ledger',
+     'General Journal',
+      'See Folio',
+      'Cash Book',
+      'Cash Book',
+      'Income Statement',
+      'Financial Statement',
+      'Statement of Cash Flow',
+       'Statement of Cash Flow'
+
+
+  ]
+},
+ {
+    id: 'dtrx-platform',
+    title: 'DTR-x Daily Time Record - Extended (Web Based Platform)',
+    subtitle: 'Interactive Attendance & Time Tracking Workspace',
+    description: 'A comprehensive time tracking and attendance management system featuring an intuitive user interface with visual instructional guides, interactive feature tutorials, and a complete user profile management system.',
+    longDescription: 'Contributed to the development of DTR-x, an extended daily time recording system designed to streamline employee attendance tracking and time management. Focused on creating an exceptional user experience through comprehensive visual guides and intuitive profile management features.',
+    image: '/src/assets/images/dtrx1.png',
     category: 'web',
-    tags: ['React', 'Tailwind CSS', 'Framer Motion', 'UI Concept'],
-    tools: ['Figma', 'React', 'Vite', 'Tailwind'],
-    client: 'Aura Laboratories Co.',
-    date: 'Oct 2025',
-    liveUrl: 'https://aura-skincare.example.com',
-    githubUrl: 'https://github.com/aileenlagura/aura-skincare',
-    role: 'Lead UI/UX Designer & Frontend Developer',
+    tags: ['Frontend Dev', 'UI/UX Design', 'User Profiles', 'Interactive Training'],
+    tools: ['React', 'TypeScript', 'Vite', 'Framer Motion'],
+    client: 'Collaborative Academic Project – Bohol Island State University (Bilar Campus)',
+    date: 'August 2025 ',
+    liveUrl: 'https://dtrx.bisubilar.org/',
+    githubUrl: '#',
+    role: 'Frontend Developer - UI/UX & User Profile Specialist (Phase 2)',
     features: [
-      'Interactive ingredient exploration wheel with custom SVG animations.',
-      'Sleek sliding cart tray using spring-backed physics layout drawers.',
-      'Aesthetic editorial grid optimizing fluid high-definition image scaling.',
-      'Responsive design perfectly unified across mobile, tablet, and 4K displays.'
+      'Interactive Instructional System: Implemented step-by-step visual guides showing users how to navigate key functionalities. Created custom visual tooltips and image-based tutorials with contextual overlays to optimize onboarding for all staff skill levels.',
+      'Comprehensive User Profile Management: Designed and developed personalized dashboards to hold employee records, work schedules, daily check-in histories, and overall monthly timing metrics in a high-fidelity visual layout.',
+      'Aesthetic Responsive UI Components: Built clean, responsive interfaces that ensure seamless logging experiences on mobile screen factors as well as high-resolution desktop terminals, backed by smooth layout state animations.'
     ],
     gallery: [
-      '/src/assets/images/project_webux_1779523344332.png',
-      '/src/assets/images/aura_pdp_screenshot_1780314358786.png'
-    ],
+     
+    '/src/assets/images/dtrx1.png',
+    '/src/assets/images/dtrx2.png',
+    '/src/assets/images/dtrx3.jpg',
+    '/src/assets/images/dtrx4.jpg',
+    '/src/assets/images/dtrx5.jpg',
+    '/src/assets/images/dtrx6.jpg',
+    '/src/assets/images/dtrx7.jpg',
+    '/src/assets/images/dtrx9.jpg'
+  ],
     galleryTitles: [
-      'Aura Skincare Landing Page & Digital Boutique',
-      'Organic Ingredient Showcase & Slider PDP'
+      'DTR-X Landing Page',
+      'Key Features',
+      'Dashboard',
+      'Dashboard',
+      'Settings Quick Guide',
+      'Payslip Guide',
+      'Employee Guide',
+      'Settings Profile Guide'
+
+
     ]
   },
-  {
-    id: 'solis-tracker',
-    title: 'Solis Mood & Routine',
-    subtitle: 'Self-Care Companion mobile App',
-    description: 'A cozy daily mobile companion checking mood, mindfulness goals, and habits with delightful playful animations.',
-    longDescription: 'Solis is a mobile-first wellness system designed to help users track emotional pacing, daily hydration, and breathing routines without pressure. Built around the philosophical core of Korean-style minimalist apps, it features soft lavender and rose tints, organic wavy progress bars, and hand-drawn micro-interaction animations. Users are welcomed with friendly morning greetings that adapt based on weather and historical logs.',
-    image: '/src/assets/images/project_mobile_1779523362772.png',
-    category: 'uiux',
-    tags: ['Figma UI/UX', 'Mobile Design', 'Interaction Design', 'Prototype'],
-    tools: ['Figma', 'Adobe Illustrator', 'Procreate', 'ProtoPie'],
-    client: 'Solis Wellness Group',
-    date: 'Jan 2026',
-    liveUrl: 'https://solis-app.example.com',
-    githubUrl: 'https://github.com/aileenlagura/solis-wellness',
-    role: 'Product Designer',
-    features: [
-      'Interactive mood mandala generator matching color psychology to diary entries.',
-      'Gentle fluid-simulated water log system updating visually as user inputs custom volumes.',
-      'Haptic-backed calm circular breathing meter assisting in grounding exercises.',
-      'Complete comprehensive design token library with 50+ fully accessible system components.'
-    ],
-    gallery: [
-      '/src/assets/images/project_mobile_1779523362772.png',
-      '/src/assets/images/solis_breathing_app_1780314376942.png'
-    ],
-    galleryTitles: [
-      'Solis Companion Mobile App Key Concept Screens',
-      'Daily Grounding Breath Cycles & Meditation Circle'
-    ]
-  },
-  {
-    id: 'maison-rose',
-    title: 'Maison de Rose',
-    subtitle: 'Boutique Bakery Corporate Identity',
-    description: 'An elegant branding system, delicate menu structures, and exquisite tactile packaging specs for a warm, pastry patisserie.',
-    longDescription: 'Maison de Rose is an artisan pastry boutique located in Gangnam specializing in organic, botanically infused baked goods. We designed a holistic identity system inspired by traditional European copper lettering and modern Korean pastel aesthetics. The deliverables spanned brand strategy, custom debossed box packaging specs, menu card interactions, and an ultra-chic responsive promotional landing page.',
-    image: '/src/assets/images/project_brand_1779523386945.png',
-    category: 'branding',
-    tags: ['Brand Identity', 'Package Design', 'Art Direction', 'Logo Design'],
-    tools: ['Adobe Illustrator', 'Photoshop', 'Figma', 'InDesign'],
-    client: 'Maison de Rose Patisserie',
-    date: 'Dec 2025',
-    liveUrl: 'https://maison-rose.example.com',
-    githubUrl: 'https://github.com/aileenlagura/maison-rose-branding',
-    role: 'Art Director & Brand Designer',
-    features: [
-      'Elegant, dual-tone logo with fine line art combining a climbing rose with classical whisk forms.',
-      'Eco-friendly packaging blueprint employing soy ink formulations and tactile linen finishes.',
-      'Interactive online dessert selection menu utilizing smooth parallax card transitions.',
-      'Curated digital visual identity toolkit with bespoke color guides and font pairings.'
-    ],
-    gallery: [
-      '/src/assets/images/project_brand_1779523386945.png',
-      '/src/assets/images/maison_packaging_specs_1780314392849.png'
-    ],
-    galleryTitles: [
-      'Maison de Rose Brand Guidelines & Palette Asset Specs',
-      'Artisanal Embossed Packaging Layout Blueprints'
-    ]
-  },
-  {
-    id: 'muse-journal',
-    title: 'Muse Distraction-Free Journal',
-    subtitle: 'Ambient Writing Workspace',
-    description: 'A beautifully isolated writing sandbox built for authors to log thoughts paired with ambient background synthesis.',
-    longDescription: 'Muse Journal provides a screen space strictly dedicated to the craft of thinking and typing. By combining extreme typographic simplicity with mild, customizable soundscapes (such as soft rain on petals, gentle tea steaming, and cozy pages flipping), the app acts as a digital sanctuary. Built featuring local indexDB persistence, automatic draft synchronization, and clean customizable typeface layouts.',
-    image: 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&q=80&w=720&h=540',
-    category: 'development',
-    tags: ['React.js', 'Web Audio API', 'IndexedDB', 'TailwindCSS'],
-    tools: ['React', 'Web Audio API', 'TypeScript', 'Tailwind'],
-    client: 'Personal Project',
-    date: 'Mar 2026',
-    liveUrl: 'https://muse-write.example.com',
-    githubUrl: 'https://github.com/aileenlagura/muse-journal',
-    role: 'Full-Stack Creator',
-    features: [
-      'Interactive customizable typography board offering hand-picked editorial Serif fonts.',
-      'Ambient audio canvas using the Web Audio API to mix spatial relaxing noise channels live.',
-      'Robust automatic autosaving backup protecting written work across offline states.',
-      'Bespoke visual analytics page with charming pink calorie-like graphs charting word density.'
-    ],
-    gallery: [
-      'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&q=80&w=720&h=540',
-      '/src/assets/images/muse_workspace_view_1780314412662.png'
-    ],
-    galleryTitles: [
-      'Quiet Workspace Reading & Creative Environment',
-      'Distraction-Free Editorial Layout & Ambient Selection Bar'
-    ]
-  },
-  {
-    id: 'peachy-explorations',
-    title: 'Peachy Creative Playground',
-    subtitle: 'High-Performance UI Interactions',
-    description: 'An interactive showcase exploring gorgeous physics layouts, customized cursors, and custom web canvas layers.',
-    longDescription: 'Peachy Portfolio is a creative test-bed crafted utilizing Vite, custom canvas frames, and heavy usage of absolute fluid layouts in Framer Motion. It showcases what is possible when pushing traditional portfolio rules aside: drag-and-drop retro UI stickers, bouncy cards styled like modern Korean photo booths, and reactive custom bubble mouse trails that split into flower confetti upon clicks.',
-    image: 'https://images.unsplash.com/photo-1522542550221-31fd19575a2d?auto=format&fit=crop&q=80&w=720&h=540',
-    category: 'web',
-    tags: ['Creative Coding', 'Canvas', 'Framing Physics', 'Vite'],
-    tools: ['TypeScript', 'Framer Motion', 'HTML Canvas', 'Tailwind'],
-    client: 'Experimental Showcase',
-    date: 'May 2026',
-    liveUrl: 'https://peachy-play.example.com',
-    githubUrl: 'https://github.com/aileenlagura/peachy-play',
-    role: 'Creative Web Engineer',
-    features: [
-      'Interactive physics canvas simulating soft gravity sticker drops via bounding boundaries.',
-      'Mouse custom bubble-bursting canvas trail with configurable toggle speed setting.',
-      'Bouncy glass cards utilizing advanced backdrop-filter tricks to adapt on gradient backdrops.',
-      'Dynamic CSS asset grids allowing layout items to be resized by click drag handlers.'
-    ],
-    gallery: [
-      'https://images.unsplash.com/photo-1522542550221-31fd19575a2d?auto=format&fit=crop&q=80&w=720&h=540',
-      '/src/assets/images/peachy_sticker_canvas_1780314430438.png'
-    ],
-    galleryTitles: [
-      'Creative Frontend Wireframe Conception Screen',
-      'Interactive Gravity Physics Sticker Sandbox & Canvas Mouse Trail'
-    ]
-  },
-  {
-    id: 'bloom-tokens',
-    title: 'Bloom Design Tokens & UI',
-    subtitle: 'Premium Accessibility Toolkit',
-    description: 'A meticulous Figma library and comprehensive token suite packed with over 300 compliant feminine layout states.',
-    longDescription: 'Bloom is a state-of-the-art visual token setup created to streamline UI generation for feminine lifestyle brands. Tested for WCAG AAA visual contrast levels and screen-reader accessibility, the system converts raw Figma component files into direct Tailwind presets. Highly loved by startup teams looking to immediately establish a luxurious pastel identity without sacrificing layout performance.',
-    image: 'https://images.unsplash.com/photo-1513151233558-d860c5398176?auto=format&fit=crop&q=80&w=720&h=540',
-    category: 'uiux',
-    tags: ['Design Systems', 'Figma Tokens', 'Accessibility AAA', 'Mobile Library'],
-    tools: ['Figma', 'Style Dictionary', 'JSON tokens', 'Zeroheight'],
-    client: 'Bloom Design Labs',
-    date: 'Nov 2025',
-    liveUrl: 'https://bloom-tokens.example.com',
-    githubUrl: 'https://github.com/aileenlagura/bloom-design-system',
-    role: 'System Architect',
-    features: [
-      'Meticulously managed JSON design token system compiling instantly for dry code pipelines.',
-      '300+ Figma components supporting advanced variable variants and automatic dark states.',
-      'Strict AAA color compliance maintaining rich legible contrast against soft pink screens.',
-      'Export support allowing direct implementation with React styled-components, CSS, or Tailwind.'
-    ],
-    gallery: [
-      'https://images.unsplash.com/photo-1513151233558-d860c5398176?auto=format&fit=crop&q=80&w=720&h=540',
-      '/src/assets/images/bloom_design_tokens_1780314448917.png'
-    ],
-    galleryTitles: [
-      'Bloom Abstract Composition & Styling Atmosphere Layout',
-      'Figma Design Tokens & Accessible AAA Component Setups'
-    ]
-  }
+   {
+  id: 'dtrx-mobile-app',
+  title: 'DTR-x Daily Time Record - Extended (Mobile Application)',
+  subtitle: 'Native Companion Time & Attendance App',
+  description: 'A comprehensive mobile time tracking and attendance management application built with Flutter, featuring seamless integration with the DTR-x web platform database for real-time synchronization of employee records, payslips, and administrative functions.',
+  longDescription: 'Developed a native mobile application version of the DTR-x (Daily Time Record - Extended) system using Flutter, transforming the web platform into a fully-functional mobile experience. The app connects directly to the existing DTR-x web database, ensuring real-time data synchronization across all platforms. This allows campus staff and faculty to access attendance tracking, payroll information, leave requests, and administrative services on-the-go while maintaining data consistency with the web system.',
+  image: '/src/assets/images/dtrx_mobile1.png',
+  category: 'mobile',
+  tags: ['Mobile Dev', 'Flutter', 'Database Integration', 'Real-Time Sync', 'Cross-Platform'],
+  tools: ['Flutter', 'Dart', 'Firebase', 'RESTful API', 'SQLite'],
+  client: 'Collaborative Academic Project – Bohol Island State University (Bilar Campus)',
+  date: 'August 2025',
+  liveUrl: '#',
+  githubUrl: '#',
+  role: 'Mobile Application Developer - Flutter & Database Integration (Phase 2)',
+  features: [
+    'Unified Database Architecture: Engineered a seamless connection between the Flutter mobile app and the existing DTR-x web platform database. Implemented RESTful API endpoints to ensure real-time data synchronization, allowing users to access the same employee records, attendance logs, and payslip information across both web and mobile platforms without data duplication or conflicts.',
+    'Dynamic Dashboard & Attendance Tracking: Developed an intuitive mobile dashboard displaying real-time attendance status, recent clock-in/out activities, and visual progress indicators. Users can view their daily time records, check work schedules, and monitor attendance history with smooth animations and responsive touch interactions optimized for mobile devices.',
+    'Digital Payslip & Payroll Management: Created a secure mobile payslip viewer that fetches salary information directly from the web database. Employees can access detailed earnings, deductions, and net pay breakdowns for any pay period, with options to download or share PDF copies. The system automatically updates when new payroll data is processed in the web platform.',
+    'Leave Request & Emergency Attendance Workflow: Built streamlined mobile forms for submitting leave applications and emergency attendance logs. The app communicates with the web backend to process requests, track approval status in real-time, and send push notifications when supervisors review submissions.',
+    'Administrative Portal & Memo System: Implemented specialized admin features allowing authorized users to manage travel orders, view service credits, and broadcast official memos to staff. The memo system syncs instantly with the web platform, ensuring all employees receive important announcements simultaneously across all devices.',
+    'Cross-Platform Performance Optimization: Leveraged Flutter\'s native compilation capabilities to deliver smooth 60fps animations, fast load times, and offline-first architecture with local SQLite caching. The app maintains functionality during poor connectivity and syncs data automatically when connection is restored.'
+  ],
+  gallery: [
+    '/src/assets/images/dtrx_mobile1.png',
+    '/src/assets/images/dtrx_mobile2.png',
+    '/src/assets/images/dtrx_mobile3.png',
+    '/src/assets/images/dtrx_mobile4.png',
+    '/src/assets/images/dtrx_mobile5.png',
+    '/src/assets/images/dtrx_mobile6.png'
+  ],
+  galleryTitles: [
+    'Landing Page',
+    'Landing Page',
+    'About',
+    'Key Features',
+    'Key Features',
+    'Sign In'
+
+  ]
+},
+
+ {
+  id: 'my-daily-tracker',
+  title: 'My Daily Tracker',
+  subtitle: 'UI/UX Design Concept',
+  description: 'A mobile wellness application designed in Figma to help users track moods, mindfulness, habits, and daily self-care through a clean and calming user experience.',
+
+  longDescription:
+    'My Daily Tracker is a high-fidelity UI/UX design concept created in Figma. The project focuses on building a relaxing and intuitive mobile experience for tracking emotions, habits, sleep, hydration, and personal wellness. It features a soft pastel color palette, minimalist layouts, and interactive prototype screens that prioritize accessibility, simplicity, and user-centered design. This project showcases my skills in user interface design, user experience planning, wireframing, prototyping, and design systems. It is currently in the design phase and has not yet been developed or deployed.',
+
+  image: '/src/assets/images/mydailytracker.png',
+
+  category: 'ui/ux',
+
+  tags: [
+    'Figma',
+    'UI Design',
+    'UX Design',
+    'Mobile App',
+    'Prototype'
+  ],
+
+  tools: [
+    'Figma'
+  ],
+
+  client: 'Personal Project in our Subject - UI/UX Design',
+
+  date: 'November 2025',
+
+  status: 'Design Phase',
+
+  liveUrl: '',
+
+  githubUrl: '',
+
+  role: 'UI/UX Designer',
+
+  features: [
+    'High-fidelity mobile interface designed in Figma.',
+    'Interactive clickable prototype for user navigation.',
+    'Mood tracking and self-care dashboard concept.',
+    'Daily habit, hydration, sleep, and gratitude tracking screens.',
+    'Consistent design system with reusable components and typography.',
+    'Responsive layouts following modern mobile UI guidelines.'
+  ],
+
+  gallery: [
+    '/src/assets/images/1.png',
+    '/src/assets/images/2.png',
+    '/src/assets/images/3.png',
+    '/src/assets/images/4.png',
+    '/src/assets/images/5.png',
+    '/src/assets/images/6.png',
+    '/src/assets/images/7.png',
+    '/src/assets/images/8.png',
+    '/src/assets/images/9.png',
+    '/src/assets/images/10.png',
+    '/src/assets/images/11.png',
+    '/src/assets/images/12.png',
+    '/src/assets/images/13.png',
+    '/src/assets/images/14.png',
+    '/src/assets/images/15.png',
+    '/src/assets/images/16.png',
+    '/src/assets/images/17.png',
+    '/src/assets/images/18.png',
+    '/src/assets/images/19.png'
+  ],
+
+  galleryTitles: [
+    'Landing Page',
+    'Sign In',
+    'Sign Up',
+    'Home Dashboard',
+    'Tracker Overview',
+    'Mental & Emotional Wellness',
+    'Rate My Day',
+    'Gratitude Journal',
+    'Anxiety Tracker',
+    'Highlights of the Day',
+    'Self-Care',
+    'Sleep & Physical Health',
+    'Habits & Productivity',
+    'Creativity & Expression',
+    'Dashboard Overview',
+    'Featured',
+    'Feature Details',
+    'Profile',
+    'Profile Overview'
+  ]
+},
+ {
+  id: 'ebabay-platform',
+
+  title: 'Ebabay - Multi-Service E-Commerce Platform',
+
+  subtitle: 'Collaborative Academic Web Application',
+
+  description:
+    'A collaborative academic web application integrating e-commerce, messaging, appointment booking, surveys, and Baybayin-related services. As the Systems Analyst, I was responsible for analyzing business requirements, defining system workflows, documenting functional specifications, and collaborating with the development team throughout the project.',
+
+  // FIX APPLIED HERE: Escaped the apostrophe in "project's" as "project\'s"
+  longDescription:
+    'Ebabay is a collaborative academic project developed by BS Computer Science students at Bohol Island State University – Bilar Campus. The platform combines e-commerce functionality with specialized digital services, including Baybayin transliteration, henna appointment booking, surveys, and integrated messaging. My primary responsibility was serving as the Systems Analyst, where I gathered and analyzed system requirements, documented functional and non-functional specifications, created system workflows and use cases, coordinated with developers and designers, and ensured that the implemented features aligned with the project\'s objectives.',
+
+  image: '/src/assets/images/ebaybay1.png',
+
+  category: 'web',
+
+  tags: [
+    'Collaborative Project',
+    'Systems Analysis',
+    'Requirements Analysis',
+    'Software Documentation',
+    'Web Application'
+  ],
+
+  tools: [
+    'Figma',
+    'Draw.io',
+    'Lucidchart',
+    'Google Docs',
+    'Jira'
+  ],
+
+  client: 'Collaborative Academic Project – Bohol Island State University (Bilar Campus)',
+
+  date: 'October 2024',
+
+
+  liveUrl: 'https://ebaybaymo.bisubilar.org/',
+
+  githubUrl: '',
+
+  role: 'Systems Analyst',
+
+  features: [
+    'Conducted requirements gathering through stakeholder discussions and project meetings.',
+
+    'Prepared Software Requirements Specification (SRS) documentation and functional requirements.',
+
+    'Created system workflows, use case diagrams, user stories, and process documentation.',
+
+    'Collaborated closely with UI/UX designers and developers to ensure accurate implementation of system requirements.',
+
+    'Validated completed modules against documented requirements and participated in feature verification.',
+
+    'Contributed to planning and analysis for authentication, e-commerce, messaging, Baybayin services, surveys, and appointment booking modules.'
+  ],
+
+  gallery: [
+    '/src/assets/images/ebaybay1.png',
+    '/src/assets/images/ebaybay2.png',
+    '/src/assets/images/ebaybay3.png',
+    '/src/assets/images/ebaybay4.png',
+    '/src/assets/images/ebaybay5.png',
+    '/src/assets/images/ebaybay6.png',
+    '/src/assets/images/ebaybay7.png',
+    '/src/assets/images/ebaybay8.png'
+  ],
+
+  galleryTitles: [
+    'Landing Page',
+    'Explore Products',
+    'Development Team',
+    'Sign In',
+    'User Dashboard Navigation',
+    'Dashboard (Light Mode)',
+    'Dashboard (Dark Mode)',
+    'Henna Booking Module'
+  ]
+},
+{
+  id: 'luxury-real-estate',
+  title: 'Luxury Real Estate Management System',
+  subtitle: 'Academic Full-Stack PHP Property Management System',
+
+  description:
+    'A full-stack academic web application developed using PHP and MySQL that streamlines property sales, installment computation, billing, and inventory management through secure role-based access for Clients, Cashiers, Agents, and Administrators.',
+
+  longDescription:
+    'Developed as an academic project for the BS Computer Science program at Bohol Island State University – Bilar Campus, this full-stack real estate management system digitizes property sales and financial management. The application features a public property catalog, secure authentication, role-based access control (RBAC), automated installment calculations, billing workflows, loan tracking, and property inventory management. The system improves transaction accuracy, enhances user experience, and demonstrates practical software engineering concepts including database management, authentication, and business process automation.',
+
+  image: '/src/assets/images/realstate14.jpg',
+
+  category: 'web',
+
+  tags: [
+    'Academic Project',
+    'Full-Stack',
+    'PHP',
+    'MySQL',
+    'Role-Based Access Control',
+    'Property Management'
+  ],
+
+  tools: [
+    'PHP',
+    'MySQL',
+    'Bootstrap',
+    'JavaScript',
+    'HTML5',
+    'CSS3'
+  ],
+
+  client: 'Academic Project  Bohol Island State University (Bilar Campus)',
+
+  date: 'May 2024',
+
+  status: 'Completed',
+
+  liveUrl: '#',
+
+  githubUrl: '#',
+
+  role: 'Full-Stack PHP Developer',
+
+  features: [
+    'Client Portal: Browse available properties, search listings, view detailed property information, and calculate monthly installment payments based on customizable down payment and loan terms.',
+
+    'Cashier Dashboard: Process client payments, manage installment records, monitor loan balances, generate billing information, and issue printable receipts.',
+
+    'Agent Dashboard: Add new property listings, update property information, manage property availability, and remove sold properties from the public catalog.',
+
+    'Administrator Dashboard: Manage users, oversee transactions, monitor financial records, generate reports, and maintain complete system administration.',
+
+    'Automated Loan Management: Prevents clients from purchasing additional properties until existing loan balances are fully settled.',
+
+    'Google Maps Integration: Displays property locations using the Google Maps API for improved property discovery.'
+  ],
+
+  gallery: [
+    '/src/assets/images/realstate1.jpg',
+    '/src/assets/images/realstate2.jpg',
+    '/src/assets/images/realstate3.jpg',
+    '/src/assets/images/realstate4.jpg',
+    '/src/assets/images/realstate5.jpg',
+    '/src/assets/images/realstate6.jpg',
+    '/src/assets/images/realstate7.jpg',
+    '/src/assets/images/realstate8.jpg',
+    '/src/assets/images/realstate9.jpg',
+    '/src/assets/images/realstate10.jpg',
+    '/src/assets/images/realstate11.jpg',
+    '/src/assets/images/realstate12.jpg',
+    '/src/assets/images/realstate13.jpg',
+    '/src/assets/images/realstate14.jpg'
+  ],
+
+  galleryTitles: [
+    'Landing Page',
+    'Admin Dashboard',
+    'Sales Reports',
+    'Financial Reports',
+    'Property Management',
+    'Contact Page',
+    'Client Login',
+    'Client Profile',
+    'Agent Dashboard',
+    'Client Dashboard',
+    'Property Search with Google Maps API',
+    'About Page',
+    'Property Listings',
+    'Property Details'
+  ]
+},
+
+{
+  id: 'athenaeum-digital',
+
+  title: 'Athenaeum Digital Library Management System',
+
+  subtitle: 'Academic Full-Stack Library Management Platform',
+
+  description:
+    'A modern academic library management system featuring role-based access, real-time inventory management, digital book circulation, automated penalty tracking, and administrative reporting.',
+
+  longDescription:
+    'Athenaeum Digital is a full-stack academic library management system developed for the BS Computer Science program at Bohol Island State University – Bilar Campus. Although the original course requirement required a PHP/MySQL implementation, this enhanced version was redesigned using React, Express.js, and TypeScript to demonstrate modern full-stack development practices. The application implements secure Role-Based Access Control (RBAC) for Students, Staff, and Administrators while automating library operations including book inventory, borrowing, returning, penalty computation, and activity monitoring.',
+
+  image: '/src/assets/images/library1.png',
+
+  category: 'web',
+
+  tags: [
+    'Academic Project',
+    'React',
+    'TypeScript',
+    'Express.js',
+    'Role-Based Access Control',
+    'Library Management'
+  ],
+
+  tools: [
+    'React 19',
+    'TypeScript',
+    'Express.js',
+    'Node.js',
+    'REST API',
+    'HTML5',
+    'CSS3'
+  ],
+
+  client: 'Academic Project  Bohol Island State University (Bilar Campus)',
+
+  date: 'April 2024',
+
+  status: 'Completed',
+
+  liveUrl: 'https://github.com/aileenlagura/library-management-system',
+
+  githubUrl: 'https://github.com/aileenlagura/library-management-system',
+
+  role: 'Full-Stack Developer',
+
+  features: [
+    'Student Portal: Browse the digital catalog, search books, request borrowing, process returns, monitor account status, and receive automated overdue notifications.',
+
+    'Staff Dashboard: Process borrowing and returning transactions, update inventory records, assign penalties, and monitor daily circulation activities.',
+
+    'Administrator Dashboard: Complete CRUD management for books, user accounts, library inventory, and operational reports with centralized administrative controls.',
+
+    'Real-Time Inventory Management: Automatically updates book availability and borrowing records after every successful transaction.',
+
+    'Automated Penalty Management: Calculates penalties for overdue, lost, and damaged books while maintaining complete transaction history.',
+
+    'Analytics and Reporting: Displays library statistics including available books, borrowed books, registered users, and exportable activity reports.'
+  ],
+
+  gallery: [
+    '/src/assets/images/library1.png',
+    '/src/assets/images/library2.png',
+    '/src/assets/images/library3.png',
+    '/src/assets/images/library4.png',
+    '/src/assets/images/library5.png',
+    '/src/assets/images/library6.png',
+    '/src/assets/images/library7.png'
+  ],
+
+  galleryTitles: [
+    'Administrator Dashboard',
+    'Student Dashboard',
+    'Digital Book Catalog',
+    'Book Search',
+    'Borrow Books',
+    'Return Books',
+    'Book Management & Library Statistics'
+  ]
+}
+
 ];
 
 export const SERVICES = [
@@ -297,24 +573,7 @@ export const SERVICES = [
     accentColor: 'text-rose-500',
     pastelBg: 'from-rose-50/50 to-pink-100/30 border-rose-100/60'
   },
-  {
-    id: 'srv-frontend',
-    title: 'Frontend Development',
-    description: 'Translating rich Figma prototypes into responsive, accessible, pixel-perfect React and Tailwind CSS applications.',
-    detailedInfo: 'I build clean, component-driven, responsive architectures. Utilizing modern TypeScript frameworks, I prioritize blazing-fast loading speeds, clean semantic code, and perfect cross-browser stability. Animations are hand-tuned using Framer Motion to ensure they enhance rather than distract.',
-    iconName: 'Code',
-    accentColor: 'text-pink-500',
-    pastelBg: 'from-pink-50/50 to-rose-100/30 border-pink-100/60'
-  },
-  {
-    id: 'srv-branding',
-    title: 'Branding & Visual Identity',
-    description: 'Developing soft, elegant typography guidelines, vector assets, and brand strategies designed for lifestyle startups.',
-    detailedInfo: 'Stunning logos, cohesive stationery specifications, tone-of-voice directives, and bespoke color boards. I establish organic visual narratives that tell your unique story, ensuring you resonate deeply with a highly mindful, aesthetic modern audience.',
-    iconName: 'Heart',
-    accentColor: 'text-hotpink',
-    pastelBg: 'from-orange-50/40 to-pink-100/30 border-orange-100/40'
-  },
+  
   {
     id: 'srv-web',
     title: 'Responsive Web Design',
@@ -369,37 +628,75 @@ export const SKILLS = [
 
 export const TIMELINE = [
   {
-    id: 'exp-1',
-    year: '2023 - Present',
-    period: 'S.Y. 2023 - Present',
-    title: 'Computer Science & Systems Developer (BISU Projects)',
-    organization: 'Bohol Island State University - Bilar',
-    location: 'Bilar, Bohol',
-    description: 'Encircled by challenging coursework, developing responsive web interfaces, designing mobile applications, managing database schemas, and practicing algorithmic problem-solving to build real-world software solutions.',
-    tags: ['Web Development', 'Mobile App Development', 'Data Management', 'Logical Analysis'],
-    type: 'experience'
-  },
-  {
-    id: 'exp-2',
-    year: '2022 - 2023',
-    period: 'S.Y. 2022 - 2023',
-    title: 'Computer Systems Servicing (CSS) Trainee',
-    organization: 'Bilar National High School',
-    location: 'Bilar, Bohol',
-    description: 'Acquired practical proficiency in installing computer systems, networking configurations (local area networks), hardware testing diagnostics, physical troubleshooting, and system assembly guidelines.',
-    tags: ['Systems Servicing', 'Networking', 'Diagnostics', 'Hardware Assembly'],
-    type: 'experience'
-  },
-  {
-    id: 'exp-3',
-    year: '2020 - Present',
-    period: '2020 - Present',
-    title: 'Digital Design & Virtual Office Support',
-    organization: 'Freelance & Student Technical Assistance',
-    location: 'Bilar, Bohol',
-    description: 'Offering computer literacy assistance; prototyping layouts and promotional visuals inside Canva; organizing tabular datasets via Microsoft Excel; and managing academic projects with high structural attention.',
-    tags: ['Canva Graphics', 'Spreadsheet Integrity', 'Time Management', 'Computer Literate'],
-    type: 'experience'
+    id: 'exp-sagility-ojt',
+    year: '2026',
+    period: 'May 18, 2026 - July 2026',
+    title: 'Student IT Intern (OJT)',
+    organization: 'Sagility (IT Department)',
+    location: 'Sagility, Tagbilaran, Bohol',
+    description: 'Successfully completed On-the-Job Training (OJT) within the enterprise IT Department under real-world help desk, system configuration, hardware troubleshooting, division asset inventorying, and network routing configurations.',
+    tags: [
+      'IT Support Services',
+      'Hardware Troubleshooting',
+      'Software Deployment',
+      'Asset Management',
+      'Network Cabling',
+      'Team Communication'
+    ],
+    type: 'experience',
+    details: [
+      {
+        title: 'IT Asset Management',
+        bullets: [
+          'Performed asset tagging and inventory tracking of computers and enterprise IT equipment.',
+          'Conducted asset mapping and transfer of IT assets between departments and production rooms.',
+          'Maintained high standard documentation and structural organization of corporate IT resources.'
+        ]
+      },
+      {
+        title: 'Computer Hardware Support',
+        bullets: [
+          'Handled physical computer assembly and disassembly.',
+          'Troubleshot and replaced faulty hardware components such as adapters, HDMI cables, and peripherals.',
+          'Executed display monitor replacement and layout configuration.',
+          'Set up and deployed user desktops for trainees and agents.'
+        ]
+      },
+      {
+        title: 'Software Installation and Maintenance',
+        bullets: [
+          'Installed, uninstalled, and configured enterprise applications including Citrix Workspace, Sanas Noise Cancellation, AnyDesk, and Microsoft Deployment Toolkit.',
+          'Enforced essential Windows updates and system optimization routines.',
+          'Removed outdated legacy software versions and clean-installed correct runtime variables.'
+        ]
+      },
+      {
+        title: 'User and Technical Support',
+        bullets: [
+          'Assisted employees and agents with complex computer-related system issues.',
+          'Managed account authentication, password resets, and account unlocking requests.',
+          'Resolved active device, headset, microphone, and direct analog audio faults.',
+          'Supported live agents during training and physical workspace setup.'
+        ]
+      },
+      {
+        title: 'Network and Infrastructure Support',
+        bullets: [
+          'Conducted structured cable management and desk network organization.',
+          'Assisted with basic networking activities, redundant line routing discussions, and physical switches setup.',
+          'Transferred data center physical assets and removed retired equipment like old Ethernet links, switch hubs, and structural brackets.'
+        ]
+      },
+      {
+        title: 'IT Operations and Deployment',
+        bullets: [
+          'Prepared and deployed workstation system images.',
+          'Configured operating systems and custom desktop profiles for incoming personnel.',
+          'Inspected and verified active hardware units during equipment field audits.',
+          'Assisted onboarding processes for new student interns and backed up daily support desk tasks.'
+        ]
+      }
+    ]
   },
   {
     id: 'edu-1',
@@ -438,30 +735,12 @@ export const TIMELINE = [
 
 export const TESTIMONIALS = [
   {
-    id: 'test-1',
-    name: 'Soyeon Park',
-    role: 'Founder & Director',
-    company: 'Aura Laboratories Co.',
-    text: 'Aileen has a rare, extremely special talent. She understands code just as deeply as she understands elegant graphic design. Our bounce rates decreased by 40% immediately following her visual redevelopment. She is communicative, organized, and remarkably fast.',
-    avatarUrl: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=150&h=150',
-    rating: 5
-  },
-  {
     id: 'test-2',
     name: 'Kenji Takahashi',
     role: 'Product Director',
     company: 'Solis Wellness Group',
     text: 'The UI components Aileen built for Solis are absolutely gorgeous. Our clients consistently compliment the smooth micro-interactions and cozy feel. Her dedication to clean responsive spacing and flawless typography is unparalleled.',
     avatarUrl: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=150&h=150',
-    rating: 5
-  },
-  {
-    id: 'test-3',
-    name: 'Elena Rostova',
-    role: 'Marketing Lead',
-    company: 'Maison de Rose Bakery',
-    text: 'Working with Aileen to craft our brand identity system and promotional site was an absolute dream. She crafted botanical icons that are cute, professional, and visually stunning. She brought our exact mood to life perfectly!',
-    avatarUrl: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&q=80&w=150&h=150',
     rating: 5
   }
 ];

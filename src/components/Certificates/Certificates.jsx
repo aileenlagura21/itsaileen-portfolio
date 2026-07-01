@@ -2,65 +2,166 @@
  * @license
  * SPDX-License-Identifier: Apache-2.0
  */
-
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Award, Calendar, ShieldCheck, CheckCircle, Sparkles, X, Eye, ExternalLink } from 'lucide-react';
 
 /**
- * @typedef {Object} CertificateItem
- * @property {string} id
- * @property {string} title
- * @property {string} issuer
- * @property {string} date
- * @property {string} credentialId
- * @property {string} verifyUrl
- * @property {string[]} skills
- * @property {string} [image]
- * @property {string} description
+ * Looping Typewriter Flow
+ * - Types each character one-by-one.
+ * - Holds the full text for `pauseMs` (default 2000ms).
+ * - Erases the text with the same per-character cadence.
+ * - Holds empty for `resetMs` (default 350ms).
+ * - Repeats forever. `restartKey` lets you force a re-start when the
+ *   underlying text changes (e.g. new certificate after re-mount).
  */
+function useLoopingTypewriter(text, speed = 60, pauseMs = 2000, resetMs = 350, restartKey = 0) {
+  const [out, setOut] = useState('');
+  useEffect(() => {
+    let cancelled = false;
+    let timer = null;
+
+    const wait = (ms) => new Promise((resolve) => { timer = setTimeout(resolve, ms); });
+
+    const run = async () => {
+      // Type forward
+      for (let i = 1; i <= text.length; i += 1) {
+        if (cancelled) return;
+        setOut(text.slice(0, i));
+        // eslint-disable-next-line no-await-in-loop
+        await wait(speed);
+      }
+      // Pause at full
+      if (cancelled) return;
+      await wait(pauseMs);
+      // Erase backward
+      for (let i = text.length - 1; i >= 0; i -= 1) {
+        if (cancelled) return;
+        setOut(text.slice(0, i));
+        // eslint-disable-next-line no-await-in-loop
+        await wait(Math.max(20, Math.floor(speed * 0.55)));
+      }
+      // Pause empty
+      if (cancelled) return;
+      await wait(resetMs);
+      if (cancelled) return;
+      // Loop
+      run();
+    };
+
+    setOut('');
+    run();
+
+    return () => {
+      cancelled = true;
+      if (timer) clearTimeout(timer);
+    };
+  }, [text, speed, pauseMs, resetMs, restartKey]);
+  return out;
+}
+
+function CertCardTitle({ title, isDark }) {
+  const typed = useLoopingTypewriter(title, 55, 2000, 350, title);
+  return (
+    <h3 className={`text-sm sm:text-base font-display font-semibold leading-snug group-hover:text-hotpink transition-colors min-h-[2.6rem] ${isDark ? 'text-white' : 'text-gray-900'}`}>
+      {typed}
+      <span className="animate-pulse text-hotpink">|</span>
+    </h3>
+  );
+}
 
 const CERTIFICATES = [
   {
-    id: 'cert-weekly-challenge',
-    title: 'Certificate of Achievement',
-    issuer: 'Bohol Island State University - Bilar Campus Computing Society',
-    date: 'Week 2, 2025',
-    credentialId: 'BISU-ComSoc-W2-Rank4',
-    verifyUrl: '',
-    skills: ['Competitive Programming', 'Algorithm Design', 'Problem-Solving', 'Data Structures'],
-    image: '/src/assets/images/weekly_challenge_cert_1780312944222.png',
-    description: 'Awarded Rank 4 on Week 2 of the Weekly Programming Challenge organized by Bohol Island State University - Bilar Campus Computing Society. Recognition for exceptional algorithmic problem-solving, code execution speed, and logical reasoning under time-constrained competitive conditions.'
+    id: 'cert-tesda-computer-systems',
+    title: 'Installing and Configuring Computer Systems',
+    issuer: 'Technical Education and Skills Development Authority (TESDA)',
+    date: 'June 23, 2026',
+    credentialId: 'TESDA-ICS-2026',
+    verifyUrl: 'mailto:tesdaonlineprogram@tesda.gov.ph',
+    skills: ['Computer Hardware', 'System Installation', 'Configuration', 'Technical Support', 'IT Fundamentals'],
+    image: '/src/assets/images/tesda_computer_systems.png',
+    description: 'Completed training on installing and configuring computer systems, covering hardware setup, software installation, and system configuration fundamentals.'
   },
-  
+  {
+    id: 'cert-tesda-css',
+    title: 'Introduction to CSS',
+    issuer: 'Technical Education and Skills Development Authority (TESDA)',
+    date: 'June 21, 2026',
+    credentialId: 'TESDA-CSS-2026',
+    verifyUrl: 'mailto:tesdaonlineprogram@tesda.gov.ph',
+    skills: ['CSS', 'Web Development', 'Frontend Development', 'Styling', 'Responsive Design'],
+    image: '/src/assets/images/tesda_css_intro.png',
+    description: 'Completed the Introduction to CSS course through TESDA Online Program, learning fundamental concepts of Cascading Style Sheets for web development.'
+  },
+  {
+    id: 'cert-zionlab-session3',
+    title: 'How to Scope Your Thesis Properly',
+    issuer: 'Zionlab Digital',
+    date: 'June 17, 2026',
+    credentialId: 'ZIONLAB-TBYB-S3-2026',
+    verifyUrl: '#',
+    skills: ['Project Scoping', 'Goal Setting', 'Time Management', 'Research Planning', 'Feasibility Analysis'],
+    image: '/src/assets/images/zionlab_session3.png',
+    description: 'Completed Session 3 on defining realistic project boundaries, achievable objectives, and practical implementation plans for thesis and capstone projects.'
+  },
+  {
+    id: 'cert-zionlab-session2',
+    title: 'How to Find a Problem Worth Solving',
+    issuer: 'Zionlab Digital',
+    date: 'June 15, 2026',
+    credentialId: 'ZIONLAB-TBYB-S2-2026',
+    verifyUrl: '#',
+    skills: ['Research Design', 'Problem Identification', 'Critical Thinking', 'Innovation', 'Academic Writing'],
+    image: '/src/assets/images/zionlab_session2.png',
+    description: 'Completed Session 2 focusing on identifying meaningful and research-worthy problems that lead to impactful thesis and capstone projects. Learned frameworks for evaluating problem significance.'
+  },
+  {
+    id: 'cert-zionlab-session1',
+    title: 'Why Most Thesis Groups Get Stuck',
+    issuer: 'Zionlab Digital',
+    date: 'June 12, 2026',
+    credentialId: 'ZIONLAB-TBYB-S1-2026',
+    verifyUrl: '#',
+    skills: ['Thesis Development', 'Project Planning', 'Research Methodology', 'Problem Solving', 'Team Collaboration'],
+    image: '/src/assets/images/zionlab_session1.png',
+    description: 'Participated in Session 1 of the webinar series "THINK BEFORE YOU BUILD: AI Assists. Humans Still Decide." Explored common challenges in thesis and capstone development and strategies for overcoming them.'
+  },
+  {
+    id: 'cert-bisu-programming-challenge',
+    title: 'Weekly Programming Challenge - Rank 4 (Week 2)',
+    issuer: 'Bohol Island State University - Bilar Campus Computing Society',
+    date: '2026',
+    credentialId: 'BISU-COMSOC-WPC-W2',
+    verifyUrl: '#',
+    skills: ['Programming', 'Problem Solving', 'Algorithm Implementation', 'Coding Competition', 'Software Development'],
+    image: '/src/assets/images/bisu_programming_challenge.png',
+    description: 'Achieved Rank 4 in Week 2 of the Weekly Programming Challenge organized by BISU-Bilar Campus Computing Society, demonstrating strong programming and problem-solving skills.'
+  },
   {
     id: 'cert-cpp-algorithms',
     title: 'C++ Algorithms and Complexity',
-    issuer: 'CodeChum',
-    date: 'Aug 31, 2025',
-    credentialId: 'CodeChum-CS311-539570',
-    verifyUrl: 'https://app.codechum.com/certificates/D1070',
-    skills: ['C++ Programming', 'Algorithm Design', 'Complexity Analysis', 'Data Structures'],
-    image: '/codechum_algorithms.jpg',
-    description: 'Completed BSCS 3, CS 311 - Algorithms and Complexity course with a comprehensive score of 539/570. Demonstrated mastery in algorithm design, computational complexity analysis, and advanced C++ programming techniques.'
+    issuer: 'CodeChum Learning Platform',
+    date: 'Aug. 31, 2025',
+    credentialId: 'CODECHUM-13070',
+    verifyUrl: 'https://app.codechum.com/certificates/13070',
+    skills: ['C++ Coding', 'Computational Complexity', 'Sorting Algorithms', 'Algorithm Analysis', 'Big-O Notation'],
+    image: '/src/assets/images/codechum_cpp_algorithms.jpg',
+    description: 'Successfully completed the comprehensive C++ Algorithms and Complexity course (CS 311) with a score of 539/570. Demonstrated expertise in algorithmic analysis, computational complexity, sorting algorithms, and optimization techniques.'
   },
   {
     id: 'cert-info-management',
     title: 'Information Management',
-    issuer: 'CodeChum',
+    issuer: 'CodeChum Learning Platform',
     date: 'March 1, 2025',
-    credentialId: 'CodeChum-CS221-1106-1130',
+    credentialId: 'CODECHUM-7523',
     verifyUrl: 'https://app.codechum.com/certificates/7523',
-    skills: ['Database Design', 'Data Organization', 'System Architecture', 'SQL'],
-    image: '/codechum_information_management_1780312944223.jpg',
-    description: 'Completed BSCS-2-CS-221 Information Management course with an excellent score of 1106/1130. Achieved proficiency in database design, data organization principles, and enterprise system architecture.'
+    skills: ['Information Systems', 'Data Management', 'Database Design', 'Information Architecture', 'Systems Analysis'],
+    image: '/src/assets/images/codechum_info_management.jpg',
+    description: 'Achieved excellence in Information Management with an outstanding score of 1106/1130. Mastered principles of information systems, data organization, and management strategies.'
   }
 ];
 
-/**
- * @param {Object} props
- * @param {boolean} props.isDark
- */
+
 export default function Certificates({ isDark }) {
   const [selectedCert, setSelectedCert] = useState(null);
 
@@ -72,11 +173,17 @@ export default function Certificates({ isDark }) {
       }`}
     >
       {/* Background blobs for a polished luxury look */}
+      {/* Light glow */}
+<div className="fixed top-24 left-24 w-72 h-72 rounded-full bg-pink-300/30 blur-[140px] pointer-events-none"></div>
+
+<div className="fixed bottom-10 right-10 w-96 h-96 rounded-full bg-violet-300/30 blur-[160px] pointer-events-none"></div>
+
+<div className="fixed top-1/2 left-1/2 w-72 h-72 rounded-full bg-cyan-300/20 blur-[180px] -translate-x-1/2 -translate-y-1/2 pointer-events-none"></div>
       <div className="absolute top-[30%] right-[-100px] w-80 h-80 rounded-full blur-[120px] bg-pink-200 dark:bg-pink-950/10 opacity-40 pointer-events-none" />
       <div className="absolute bottom-[10%] left-[-100px] w-80 h-80 rounded-full blur-[120px] bg-rose-200 dark:bg-rose-950/10 opacity-30 pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        
+
         {/* Section header */}
         <div className="text-center space-y-2 mb-14">
           <p className="font-mono text-xs font-semibold uppercase tracking-widest text-hotpink">
@@ -99,76 +206,94 @@ export default function Certificates({ isDark }) {
               transition={{ duration: 0.5, delay: idx * 0.1 }}
               whileHover={{ y: -6 }}
               onClick={() => setSelectedCert(cert)}
-              className={`p-6 sm:p-7 rounded-[32px] border text-left flex flex-col justify-between h-[280px] relative overflow-hidden group backdrop-blur-xl transition-all duration-500 cursor-pointer ${
+              className={`rounded-[32px] border text-left flex flex-col justify-between h-[410px] relative overflow-hidden group backdrop-blur-xl transition-all duration-500 cursor-pointer ${
                 isDark
                   ? 'bg-white/5 border-white/10 hover:border-hotpink/50 hover:bg-white/10 hover:shadow-lg hover:shadow-hotpink/5'
                   : 'bg-white/55 border-white/65 hover:border-[#fbcfe8] hover:bg-white/70 hover:shadow-xl hover:shadow-rose-100/30'
               }`}
             >
-              <div className="space-y-4">
-                {/* Header Row */}
-                <div className="flex items-center justify-between">
-                  {/* Badge */}
-                  <div className={`w-11 h-11 rounded-full flex items-center justify-center backdrop-blur-md shadow-inner transition-colors ${
-                    isDark ? 'bg-white/5 text-hotpink border border-white/10' : 'bg-white text-hotpink border border-white'
-                  }`}>
-                    <Award size={20} className="text-hotpink" />
+              {cert.image ? (
+                <div className="relative w-full h-[180px] overflow-hidden bg-pink-50/50 dark:bg-black/20 border-b border-pink-100/10 dark:border-white/5">
+                  <img
+                    src={cert.image}
+                    alt={cert.title}
+                    referrerPolicy="no-referrer"
+                    className="w-full h-full object-cover object-center transform scale-102 group-hover:scale-108 transition-transform duration-700"
+                  />
+                  {/* Overlay on hover */}
+                  <div className="absolute inset-0 bg-black/35 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                    <span className="text-[10px] font-mono font-bold text-white uppercase bg-hotpink/90 px-3 py-1 rounded-full shadow-md">
+                      Inspect Certificate
+                    </span>
                   </div>
-
-                  <span className={`text-[10px] sm:text-xs font-mono font-medium flex items-center gap-1.5 ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
-                    <Calendar size={12} className="text-hotpink shrink-0" />
-                    {cert.date}
+                </div>
+              ) : (
+                /* Elegant decorative top background representing no-image certificate */
+                <div className="h-[180px] w-full bg-gradient-to-br from-peach/15 to-pink-150/15 dark:from-plum-dark dark:to-plum-card/50 flex flex-col justify-center items-center p-6 border-b border-pink-100/10 dark:border-white/5 relative">
+                  <div className={`w-14 h-14 rounded-full flex items-center justify-center backdrop-blur-md shadow-md hover:scale-105 transition-transform ${
+                    isDark ? 'bg-white/5 text-hotpink border border-white/10' : 'bg-white text-hotpink border border-rose-100/40'
+                  }`}>
+                    <Award size={28} className="text-hotpink" />
+                  </div>
+                  <span className={`text-[10px] font-mono uppercase font-semibold text-gray-400 mt-3`}>
+                    Academic Record
                   </span>
                 </div>
+              )}
 
-                {/* Info block */}
-                <div className="space-y-1">
-                  <h3 className={`text-base font-display font-semibold leading-snug group-hover:text-hotpink transition-colors line-clamp-2 ${isDark ? 'text-white' : 'text-gray-800'}`}>
-                    {cert.title}
-                  </h3>
-                  <p className="text-xs font-sans font-semibold text-gray-500 dark:text-gray-400 line-clamp-1">
-                    {cert.issuer}
-                  </p>
+              {/* Info block */}
+              <div className="p-6 flex-1 flex flex-col justify-between">
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <span className={`text-[9px] font-mono font-bold uppercase text-hotpink`}>
+                      {cert.issuer.includes("Bohol") ? "BISU-Bilar" : "CodeChum Platform"}
+                    </span>
+                    <span className={`text-[10px] font-mono text-gray-400 font-semibold`}>
+                      {cert.date}
+                    </span>
+                  </div>
+
+                  <CertCardTitle title={cert.title} isDark={isDark} />
+
+                  {/* Tags */}
+                  <div className="flex flex-wrap gap-1">
+                    {cert.skills.slice(0, 3).map((skill) => (
+                      <span
+                        key={skill}
+                        className={`px-2 py-0.5 text-[9px] font-mono rounded-md ${
+                          isDark
+                            ? 'bg-white/5 border border-white/10 text-gray-300'
+                            : 'bg-rose-50/50 border border-rose-100/50 text-gray-500'
+                        }`}
+                      >
+                        {skill}
+                      </span>
+                    ))}
+                    {cert.skills.length > 3 && (
+                      <span className="text-[9px] font-mono text-hotpink py-0.5 px-1 font-semibold self-center">
+                        +{cert.skills.length - 3}
+                      </span>
+                    )}
+                  </div>
                 </div>
 
-                {/* Tags */}
-                <div className="flex flex-wrap gap-1.5">
-                  {cert.skills.slice(0, 3).map((skill) => (
-                    <span
-                      key={skill}
-                      className={`px-2.5 py-0.5 text-[9px] font-mono rounded-full backdrop-blur-sm ${
-                        isDark 
-                          ? 'bg-white/5 border border-white/10 text-gray-300' 
-                          : 'bg-white border border-rose-100/40 text-gray-500'
-                      }`}
-                    >
-                      {skill}
-                    </span>
-                  ))}
-                  {cert.skills.length > 3 && (
-                    <span className="text-[9px] font-mono text-hotpink py-0.5 px-1 font-semibold leading-none self-center">
-                      +{cert.skills.length - 3}
-                    </span>
-                  )}
+                {/* Bottom detail action row */}
+                <div className="flex items-center justify-between pt-3 mt-4 border-t border-dashed border-pink-200/20 dark:border-white/5">
+                  <span className={`text-[9px] font-mono ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
+                    ID: <span className="font-semibold text-hotpink/80">{cert.credentialId}</span>
+                  </span>
+
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setSelectedCert(cert);
+                    }}
+                    className="flex items-center gap-1 text-[11px] font-mono font-bold text-hotpink hover:underline hover:opacity-85"
+                  >
+                    <Eye size={11} />
+                    <span>View details</span>
+                  </button>
                 </div>
-              </div>
-
-              {/* Bottom detail action row */}
-              <div className="flex items-center justify-between pt-4 mt-auto border-t border-dashed border-pink-200/20 dark:border-white/5">
-                <span className={`text-[10px] font-mono ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
-                  ID: <span className="font-semibold text-hotpink/80">{cert.credentialId}</span>
-                </span>
-
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setSelectedCert(cert);
-                  }}
-                  className="flex items-center gap-1.5 text-xs font-mono font-bold text-hotpink hover:underline hover:opacity-85"
-                >
-                  <Eye size={12} />
-                  <span>View Details</span>
-                </button>
               </div>
             </motion.div>
           ))}
@@ -319,9 +444,22 @@ export default function Certificates({ isDark }) {
                       </p>
                     </div>
 
-                    <div className="flex items-center gap-1 bg-emerald-500/10 dark:bg-emerald-500/5 text-emerald-500 border border-emerald-500/20 px-3 py-1 rounded-full text-xs font-mono font-semibold">
-                      <CheckCircle size={12} />
-                      <span>Verified</span>
+                    <div className="flex items-center gap-2">
+                      {selectedCert.verifyUrl && (
+                        <a
+                          href={selectedCert.verifyUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-1 px-3 py-1 rounded-full text-xs font-mono font-semibold bg-hotpink/10 hover:bg-hotpink/20 text-hotpink border border-hotpink/20 transition-all cursor-pointer"
+                        >
+                          <ExternalLink size={12} />
+                          <span>Verify Live</span>
+                        </a>
+                      )}
+                      <div className="flex items-center gap-1 bg-emerald-500/10 dark:bg-emerald-500/5 text-emerald-500 border border-emerald-500/20 px-3 py-1 rounded-full text-xs font-mono font-semibold">
+                        <CheckCircle size={12} />
+                        <span>Verified</span>
+                      </div>
                     </div>
                   </div>
                 </div>
