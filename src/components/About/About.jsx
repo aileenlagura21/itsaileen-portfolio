@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 import { GraduationCap, MapPin } from 'lucide-react';
-import { motion } from 'motion/react';
+import aileenPhoto from '../../assets/images/aileen17.jpg';
 const INTRO_TEXT = 
   'I am a Computer Science student with a passion for technology, problem-solving, and continuous learning. I enjoy transforming ideas into practical solutions and leveraging technology to create meaningful impact.';
 
@@ -40,7 +40,7 @@ export default function About({ isDark }) {
               <div className="absolute -inset-1 bg-gradient-to-r from-pastelpink via-hotpink to-peach rounded-[36px] blur opacity-30 group-hover:opacity-60 transition duration-1000 group-hover:duration-300"></div>
               <div className="relative aspect-square rounded-[36px] overflow-hidden border border-white/25 dark:border-white/10 shadow-xl bg-white/10">
                 <img
-                  src="/src/assets/images/aileen17.jpg"
+                  src={aileenPhoto}
                   alt="Aileen Lagura"
                   referrerPolicy="no-referrer"
                   className="w-full h-full object-cover object-center transform scale-102 group-hover:scale-108 transition-transform duration-700"

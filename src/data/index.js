@@ -3,16 +3,20 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-// Let's import the specific images that were generated.
-// We'll define paths relative to Vite assets directory or as direct paths. Because they are in the filesystem:
-// /src/assets/images/aileenprofile.jpg
-// /src/assets/images/project_webux_1779523344332.png
-// /src/assets/images/project_mobile_1779523362772.png
-// /src/assets/images/project_brand_1779523386945.png
+const resolveImage = (imagePath) => {
+  const fileName = imagePath.replace(/^\/src\/assets\/images\//, '');
+  return new URL(`../assets/images/${fileName}`, import.meta.url).href;
+};
 
-export const AVATAR_URL = '/src/assets/images/aileenprofile.jpg';
+const normalizeProject = (project) => ({
+  ...project,
+  image: resolveImage(project.image),
+  gallery: project.gallery.map(resolveImage),
+});
 
-export const PROJECTS = [
+export const AVATAR_URL = resolveImage('/src/assets/images/aileenprofile.jpg');
+
+const PROJECTS_DATA = [
   {
   id: 'fsg-platform',
   title: 'FSG - Financial Statement Generator (Web Based Platform)',
@@ -562,6 +566,8 @@ export const PROJECTS = [
 }
 
 ];
+
+export const PROJECTS = PROJECTS_DATA.map(normalizeProject);
 
 export const SERVICES = [
   {

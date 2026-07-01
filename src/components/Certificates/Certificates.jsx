@@ -5,6 +5,14 @@
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Award, Calendar, ShieldCheck, CheckCircle, Sparkles, X, Eye, ExternalLink } from 'lucide-react';
+import tesdaComputerSystemsImage from '../../assets/images/tesda_computer_systems.png';
+import tesdaCssIntroImage from '../../assets/images/tesda_css_intro.png';
+import zionlabSession3Image from '../../assets/images/zionlab_session3.png';
+import zionlabSession2Image from '../../assets/images/zionlab_session2.png';
+import zionlabSession1Image from '../../assets/images/zionlab_session1.png';
+import bisuProgrammingChallengeImage from '../../assets/images/bisu_programming_challenge.png';
+import codechumCppAlgorithmsImage from '../../assets/images/codechum_cpp_algorithms.jpg';
+import codechumInfoManagementImage from '../../assets/images/codechum_info_management.jpg';
 
 /**
  * Looping Typewriter Flow
@@ -79,7 +87,7 @@ const CERTIFICATES = [
     credentialId: 'TESDA-ICS-2026',
     verifyUrl: 'mailto:tesdaonlineprogram@tesda.gov.ph',
     skills: ['Computer Hardware', 'System Installation', 'Configuration', 'Technical Support', 'IT Fundamentals'],
-    image: '/src/assets/images/tesda_computer_systems.png',
+    image: tesdaComputerSystemsImage,
     description: 'Completed training on installing and configuring computer systems, covering hardware setup, software installation, and system configuration fundamentals.'
   },
   {
@@ -90,7 +98,7 @@ const CERTIFICATES = [
     credentialId: 'TESDA-CSS-2026',
     verifyUrl: 'mailto:tesdaonlineprogram@tesda.gov.ph',
     skills: ['CSS', 'Web Development', 'Frontend Development', 'Styling', 'Responsive Design'],
-    image: '/src/assets/images/tesda_css_intro.png',
+    image: tesdaCssIntroImage,
     description: 'Completed the Introduction to CSS course through TESDA Online Program, learning fundamental concepts of Cascading Style Sheets for web development.'
   },
   {
@@ -101,7 +109,7 @@ const CERTIFICATES = [
     credentialId: 'ZIONLAB-TBYB-S3-2026',
     verifyUrl: '#',
     skills: ['Project Scoping', 'Goal Setting', 'Time Management', 'Research Planning', 'Feasibility Analysis'],
-    image: '/src/assets/images/zionlab_session3.png',
+    image: zionlabSession3Image,
     description: 'Completed Session 3 on defining realistic project boundaries, achievable objectives, and practical implementation plans for thesis and capstone projects.'
   },
   {
@@ -112,7 +120,7 @@ const CERTIFICATES = [
     credentialId: 'ZIONLAB-TBYB-S2-2026',
     verifyUrl: '#',
     skills: ['Research Design', 'Problem Identification', 'Critical Thinking', 'Innovation', 'Academic Writing'],
-    image: '/src/assets/images/zionlab_session2.png',
+    image: zionlabSession2Image,
     description: 'Completed Session 2 focusing on identifying meaningful and research-worthy problems that lead to impactful thesis and capstone projects. Learned frameworks for evaluating problem significance.'
   },
   {
@@ -123,7 +131,7 @@ const CERTIFICATES = [
     credentialId: 'ZIONLAB-TBYB-S1-2026',
     verifyUrl: '#',
     skills: ['Thesis Development', 'Project Planning', 'Research Methodology', 'Problem Solving', 'Team Collaboration'],
-    image: '/src/assets/images/zionlab_session1.png',
+    image: zionlabSession1Image,
     description: 'Participated in Session 1 of the webinar series "THINK BEFORE YOU BUILD: AI Assists. Humans Still Decide." Explored common challenges in thesis and capstone development and strategies for overcoming them.'
   },
   {
@@ -134,7 +142,7 @@ const CERTIFICATES = [
     credentialId: 'BISU-COMSOC-WPC-W2',
     verifyUrl: '#',
     skills: ['Programming', 'Problem Solving', 'Algorithm Implementation', 'Coding Competition', 'Software Development'],
-    image: '/src/assets/images/bisu_programming_challenge.png',
+    image: bisuProgrammingChallengeImage,
     description: 'Achieved Rank 4 in Week 2 of the Weekly Programming Challenge organized by BISU-Bilar Campus Computing Society, demonstrating strong programming and problem-solving skills.'
   },
   {
@@ -145,7 +153,7 @@ const CERTIFICATES = [
     credentialId: 'CODECHUM-13070',
     verifyUrl: 'https://app.codechum.com/certificates/13070',
     skills: ['C++ Coding', 'Computational Complexity', 'Sorting Algorithms', 'Algorithm Analysis', 'Big-O Notation'],
-    image: '/src/assets/images/codechum_cpp_algorithms.jpg',
+    image: codechumCppAlgorithmsImage,
     description: 'Successfully completed the comprehensive C++ Algorithms and Complexity course (CS 311) with a score of 539/570. Demonstrated expertise in algorithmic analysis, computational complexity, sorting algorithms, and optimization techniques.'
   },
   {
@@ -156,7 +164,7 @@ const CERTIFICATES = [
     credentialId: 'CODECHUM-7523',
     verifyUrl: 'https://app.codechum.com/certificates/7523',
     skills: ['Information Systems', 'Data Management', 'Database Design', 'Information Architecture', 'Systems Analysis'],
-    image: '/src/assets/images/codechum_info_management.jpg',
+    image: codechumInfoManagementImage,
     description: 'Achieved excellence in Information Management with an outstanding score of 1106/1130. Mastered principles of information systems, data organization, and management strategies.'
   }
 ];
