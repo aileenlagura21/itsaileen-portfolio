@@ -220,7 +220,7 @@ export default function Hero({ isDark, onContactClick, onWorkClick }) {
               transition={{ duration: 0.7, delay: 0.15 }}
               className="text-4xl sm:text-5.5xl md:text-6xl font-display font-bold tracking-tight"
             >
-              <span className="text-black text-glow-black">
+              <span className="text-black text-glow-white">
                 Hi, I’m
               </span>
               <span className="text-hotpink text-glow-pink">
