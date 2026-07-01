@@ -268,13 +268,13 @@ export default function Contact({ isDark }) {
           onSubmit={handleSubmit}
           className={`max-w-2xl mx-auto p-7 sm:p-8 rounded-[32px] border backdrop-blur-xl text-left flex flex-col gap-5 ${
             isDark
-              ? 'bg-white/5 border-white/10'
+              ? 'bg-plum-dark/70 border-white/15 shadow-lg shadow-black/20'
               : 'bg-white/45 border-white/65 shadow-sm shadow-rose-100/5'
           }`}
         >
           {/* Name Input */}
           <div className="space-y-2">
-            <label htmlFor="ct-name" className={`block text-xs font-mono font-semibold uppercase tracking-wider ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
+            <label htmlFor="ct-name" className={`block text-xs font-mono font-semibold uppercase tracking-wider ${isDark ? 'text-gray-100' : 'text-gray-600'}`}>
               Name
             </label>
             <input
@@ -290,9 +290,10 @@ export default function Contact({ isDark }) {
                 errors.name
                   ? 'border-red-300 bg-red-50/25 focus:ring-red-400 focus:border-red-400'
                   : isDark
-                  ? 'bg-white/5 border-white/10 focus:ring-hotpink focus:border-hotpink text-white'
+                  ? 'bg-white/10 border-white/20 focus:ring-hotpink focus:border-hotpink text-white placeholder:text-gray-400 caret-hotpink'
                   : 'bg-white/35 border-white/50 focus:ring-hotpink focus:border-hotpink text-gray-800'
               }`}
+              placeholder="Your Name"
             />
             {errors.name && (
               <p className="text-[10px] text-red-500 font-mono flex items-center gap-1 mt-1">
@@ -303,7 +304,7 @@ export default function Contact({ isDark }) {
 
           {/* Email Input */}
           <div className="space-y-2">
-            <label htmlFor="ct-email" className={`block text-xs font-mono font-semibold uppercase tracking-wider ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
+              <label htmlFor="ct-email" className={`block text-xs font-mono font-semibold uppercase tracking-wider ${isDark ? 'text-gray-100' : 'text-gray-600'}`}>
               Email
             </label>
             <input
@@ -319,9 +320,10 @@ export default function Contact({ isDark }) {
                 errors.email
                   ? 'border-red-300 bg-red-50/25 focus:ring-red-400 focus:border-red-400'
                   : isDark
-                  ? 'bg-white/5 border-white/10 focus:ring-hotpink focus:border-hotpink text-white'
+                  ? 'bg-white/10 border-white/20 focus:ring-hotpink focus:border-hotpink text-white placeholder:text-gray-400 caret-hotpink'
                   : 'bg-white/35 border-white/50 focus:ring-hotpink focus:border-hotpink text-gray-800'
               }`}
+              placeholder="your.email@domain.com"
             />
             {errors.email && (
               <p className="text-[10px] text-red-500 font-mono flex items-center gap-1 mt-1">
@@ -332,7 +334,7 @@ export default function Contact({ isDark }) {
 
           {/* Subject Input */}
           <div className="space-y-2">
-            <label htmlFor="ct-subject" className={`block text-xs font-mono font-semibold uppercase tracking-wider ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
+            <label htmlFor="ct-subject" className={`block text-xs font-mono font-semibold uppercase tracking-wider ${isDark ? 'text-gray-100' : 'text-gray-600'}`}>
               Subject
             </label>
             <input
@@ -348,9 +350,10 @@ export default function Contact({ isDark }) {
                 errors.subject
                   ? 'border-red-300 bg-red-50/25 focus:ring-red-400 focus:border-red-400'
                   : isDark
-                  ? 'bg-white/5 border-white/10 focus:ring-hotpink focus:border-hotpink text-white'
+                  ? 'bg-white/10 border-white/20 focus:ring-hotpink focus:border-hotpink text-white placeholder:text-gray-400 caret-hotpink'
                   : 'bg-white/35 border-white/50 focus:ring-hotpink focus:border-hotpink text-gray-800'
               }`}
+              placeholder="Subject"
             />
             {errors.subject && (
               <p className="text-[10px] text-red-500 font-mono flex items-center gap-1 mt-1">
@@ -361,7 +364,7 @@ export default function Contact({ isDark }) {
 
           {/* Message Input */}
           <div className="space-y-2">
-            <label htmlFor="ct-message" className={`block text-xs font-mono font-semibold uppercase tracking-wider ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
+            <label htmlFor="ct-message" className={`block text-xs font-mono font-semibold uppercase tracking-wider ${isDark ? 'text-gray-100' : 'text-gray-600'}`}>
               Message
             </label>
             <textarea
@@ -377,9 +380,10 @@ export default function Contact({ isDark }) {
                 errors.message
                   ? 'border-red-300 bg-red-50/25 focus:ring-red-400 focus:border-red-400'
                   : isDark
-                  ? 'bg-white/5 border-white/10 focus:ring-hotpink focus:border-hotpink text-white'
+                  ? 'bg-white/10 border-white/20 focus:ring-hotpink focus:border-hotpink text-white placeholder:text-gray-400 caret-hotpink'
                   : 'bg-white/35 border-white/50 focus:ring-hotpink focus:border-hotpink text-gray-800'
               }`}
+              placeholder="Type your message here..."
             />
             {errors.message && (
               <p className="text-[10px] text-red-500 font-mono flex items-center gap-1 mt-1">
