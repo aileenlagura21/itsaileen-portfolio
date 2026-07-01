@@ -314,13 +314,7 @@ export default function Hero({ isDark, onContactClick, onWorkClick }) {
             isDark ? 'text-gray-400 hover:text-hotpink' : 'text-gray-500 hover:text-hotpink'
           }`}
         >
-          <span>Scroll Gallery</span>
-          <motion.div
-            animate={{ y: [0, 6, 0] }}
-            transition={{ repeat: Infinity, duration: 1.5 }}
-          >
-            <ArrowDown size={12} className="text-hotpink" />
-          </motion.div>
+         
         </button>
       </div>
 
