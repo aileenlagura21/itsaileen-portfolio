@@ -15,11 +15,61 @@ const ROLES = [
   'Frontend Developer 💻'
 ];
 
+const HERO_NAME = 'Aileen Lagura';
+
+function useLoopingTypewriter(text, speed = 120, pauseMs = 1600, resetMs = 450) {
+  const [output, setOutput] = useState('');
+
+  useEffect(() => {
+    let cancelled = false;
+    let timer = null;
+
+    const wait = (ms) => new Promise((resolve) => {
+      timer = setTimeout(resolve, ms);
+    });
+
+    const run = async () => {
+      while (!cancelled) {
+        for (let i = 1; i <= text.length; i += 1) {
+          if (cancelled) return;
+          setOutput(text.slice(0, i));
+          // eslint-disable-next-line no-await-in-loop
+          await wait(speed);
+        }
+
+        if (cancelled) return;
+        await wait(pauseMs);
+
+        for (let i = text.length - 1; i >= 0; i -= 1) {
+          if (cancelled) return;
+          setOutput(text.slice(0, i));
+          // eslint-disable-next-line no-await-in-loop
+          await wait(Math.max(40, Math.floor(speed * 0.6)));
+        }
+
+        if (cancelled) return;
+        await wait(resetMs);
+      }
+    };
+
+    setOutput('');
+    run();
+
+    return () => {
+      cancelled = true;
+      if (timer) clearTimeout(timer);
+    };
+  }, [text, speed, pauseMs, resetMs]);
+
+  return output;
+}
+
 export default function Hero({ isDark, onContactClick, onWorkClick }) {
   const [roleIndex, setRoleIndex] = useState(0);
   const [charIndex, setCharIndex] = useState(0);
   const [displayText, setDisplayText] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
+  const typedName = useLoopingTypewriter(HERO_NAME, 120, 1800, 500);
 
   // High performance Typing Effect loop
   useEffect(() => {
@@ -67,7 +117,9 @@ export default function Hero({ isDark, onContactClick, onWorkClick }) {
             transition={{ duration: 0.8, type: 'spring', damping: 20 }}
             className="relative self-center mb-1"
           >
-            
+            {/* Circular frames & borders behind image */}
+            <div className="absolute inset-0 rounded-full border border-dashed border-hotpink/30 animate-spin" style={{ animationDuration: '40s' }} />
+
             {/* Avatar frame container */}
             <div className="w-44 h-44 sm:w-52 sm:h-52 rounded-full p-2.5 bg-gradient-to-tr from-pastelpink via-hotpink/20 to-peach/30 shadow-inner relative z-10">
               <div className="w-full h-full rounded-full overflow-hidden bg-white dark:bg-zinc-950 border border-pink-200/40 relative shadow-md group">
@@ -166,11 +218,13 @@ export default function Hero({ isDark, onContactClick, onWorkClick }) {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.15 }}
-              className={`text-4xl sm:text-5.5xl md:text-6xl font-display font-bold tracking-tight ${
-                isDark ? 'text-white' : 'text-gray-900'
-              }`}
+              className="text-4xl sm:text-5.5xl md:text-6xl font-display font-bold tracking-tight"
             >
-              Hi, I’m <span className="text-hotpink text-glow-pink">Aileen Lagura</span>
+              <span className="text-black">Hi, I’m </span>
+              <span className="text-hotpink text-glow-pink">
+                {typedName}
+                <span className="ml-1 animate-pulse">|</span>
+              </span>
             </motion.h1>
 
             <motion.h2
@@ -220,8 +274,6 @@ export default function Hero({ isDark, onContactClick, onWorkClick }) {
             <motion.button
               id="btn-hero-work"
               onClick={onWorkClick}
-              animate={{ y: [0, -4, 0, 4, 0], rotate: [0, 2, 0, -2, 0] }}
-              transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
               className="w-full sm:w-auto px-7 py-3.5 rounded-full bg-hotpink text-white font-sans text-xs font-semibold uppercase tracking-wider hover:bg-hotpink/95 active:scale-95 shadow-md shadow-pink-300/20 cursor-pointer transition-all flex items-center justify-center gap-2 group"
             >
               <span>Explore My Work</span>
