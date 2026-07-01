@@ -67,9 +67,7 @@ export default function Hero({ isDark, onContactClick, onWorkClick }) {
             transition={{ duration: 0.8, type: 'spring', damping: 20 }}
             className="relative self-center mb-1"
           >
-            {/* Circular frames & borders behind image */}
-            <div className="absolute inset-0 rounded-full border border-dashed border-hotpink/30 animate-spin" style={{ animationDuration: '40s' }} />
-
+            
             {/* Avatar frame container */}
             <div className="w-44 h-44 sm:w-52 sm:h-52 rounded-full p-2.5 bg-gradient-to-tr from-pastelpink via-hotpink/20 to-peach/30 shadow-inner relative z-10">
               <div className="w-full h-full rounded-full overflow-hidden bg-white dark:bg-zinc-950 border border-pink-200/40 relative shadow-md group">
