@@ -2,73 +2,17 @@
  * @license
  * SPDX-License-Identifier: Apache-2.0
  */
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { ArrowUpRight, FolderGit2, Eye, Columns3, Columns2 } from 'lucide-react';
 import { PROJECTS } from '../../data';
 
-/**
- * Looping Typewriter Flow
- * - Types each character one-by-one.
- * - Holds the full text for `pauseMs` (default 1800ms).
- * - Erases the text with the same per-character cadence.
- * - Holds empty for `resetMs` (default 400ms).
- * - Repeats forever. `restartKey` lets you force a re-start when the
- *   underlying text changes (e.g. new project after filter).
- */
-function useLoopingTypewriter(text, speed = 60, pauseMs = 1800, resetMs = 400, restartKey = 0) {
-  const [out, setOut] = useState('');
-  useEffect(() => {
-    let cancelled = false;
-    let timer = null;
-
-    const wait = (ms) => new Promise((resolve) => { timer = setTimeout(resolve, ms); });
-
-    const run = async () => {
-      // Type forward
-      for (let i = 1; i <= text.length; i += 1) {
-        if (cancelled) return;
-        setOut(text.slice(0, i));
-        // eslint-disable-next-line no-await-in-loop
-        await wait(speed);
-      }
-      // Pause at full
-      if (cancelled) return;
-      await wait(pauseMs);
-      // Erase backward
-      for (let i = text.length - 1; i >= 0; i -= 1) {
-        if (cancelled) return;
-        setOut(text.slice(0, i));
-        // eslint-disable-next-line no-await-in-loop
-        await wait(Math.max(20, Math.floor(speed * 0.55)));
-      }
-      // Pause empty
-      if (cancelled) return;
-      await wait(resetMs);
-      if (cancelled) return;
-      // Loop
-      run();
-    };
-
-    setOut('');
-    run();
-
-    return () => {
-      cancelled = true;
-      if (timer) clearTimeout(timer);
-    };
-  }, [text, speed, pauseMs, resetMs, restartKey]);
-  return out;
-}
-
 function ProjectTitle({ title, isDark }) {
-  const typed = useLoopingTypewriter(title, 60, 2000, 350, title);
   return (
     <h4 className={`text-lg font-display font-bold tracking-tight group-hover:text-hotpink transition-colors min-h-[1.75rem] ${
       isDark ? 'text-white' : 'text-gray-800'
     }`}>
-      {typed}
-      <span className="animate-pulse text-hotpink">|</span>
+      {title}
     </h4>
   );
 }

@@ -2,7 +2,7 @@
  * @license
  * SPDX-License-Identifier: Apache-2.0
  */
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Award, Calendar, ShieldCheck, CheckCircle, Sparkles, X, Eye, ExternalLink } from 'lucide-react';
 import tesdaComputerSystemsImage from '../../assets/images/tesda_computer_systems.png';
@@ -14,66 +14,10 @@ import bisuProgrammingChallengeImage from '../../assets/images/bisu_programming_
 import codechumCppAlgorithmsImage from '../../assets/images/codechum_cpp_algorithms.jpg';
 import codechumInfoManagementImage from '../../assets/images/codechum_info_management.jpg';
 
-/**
- * Looping Typewriter Flow
- * - Types each character one-by-one.
- * - Holds the full text for `pauseMs` (default 2000ms).
- * - Erases the text with the same per-character cadence.
- * - Holds empty for `resetMs` (default 350ms).
- * - Repeats forever. `restartKey` lets you force a re-start when the
- *   underlying text changes (e.g. new certificate after re-mount).
- */
-function useLoopingTypewriter(text, speed = 60, pauseMs = 2000, resetMs = 350, restartKey = 0) {
-  const [out, setOut] = useState('');
-  useEffect(() => {
-    let cancelled = false;
-    let timer = null;
-
-    const wait = (ms) => new Promise((resolve) => { timer = setTimeout(resolve, ms); });
-
-    const run = async () => {
-      // Type forward
-      for (let i = 1; i <= text.length; i += 1) {
-        if (cancelled) return;
-        setOut(text.slice(0, i));
-        // eslint-disable-next-line no-await-in-loop
-        await wait(speed);
-      }
-      // Pause at full
-      if (cancelled) return;
-      await wait(pauseMs);
-      // Erase backward
-      for (let i = text.length - 1; i >= 0; i -= 1) {
-        if (cancelled) return;
-        setOut(text.slice(0, i));
-        // eslint-disable-next-line no-await-in-loop
-        await wait(Math.max(20, Math.floor(speed * 0.55)));
-      }
-      // Pause empty
-      if (cancelled) return;
-      await wait(resetMs);
-      if (cancelled) return;
-      // Loop
-      run();
-    };
-
-    setOut('');
-    run();
-
-    return () => {
-      cancelled = true;
-      if (timer) clearTimeout(timer);
-    };
-  }, [text, speed, pauseMs, resetMs, restartKey]);
-  return out;
-}
-
 function CertCardTitle({ title, isDark }) {
-  const typed = useLoopingTypewriter(title, 55, 2000, 350, title);
   return (
     <h3 className={`text-sm sm:text-base font-display font-semibold leading-snug group-hover:text-hotpink transition-colors min-h-[2.6rem] ${isDark ? 'text-white' : 'text-gray-900'}`}>
-      {typed}
-      <span className="animate-pulse text-hotpink">|</span>
+      {title}
     </h3>
   );
 }
