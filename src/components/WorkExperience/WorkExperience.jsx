@@ -55,7 +55,20 @@ export default function WorkExperience({ isDark }) {
                   <div className="w-1.5 h-1.5 rounded-full bg-hotpink" />
                 </div>
 
-                <div className="space-y-3">
+                 <p className="text-[23px] font-sans font-semibold text-hotpink leading-none">
+  {item.organization}
+</p>
+
+                  <div className="flex items-center gap-2">
+                    <Briefcase size={16} className="text-hotpink" />
+                    <h4 className={`text-base sm:text-lg font-display font-semibold tracking-tight ${isDark ? 'text-white' : 'text-gray-800'}`}>
+                      {item.title}
+                    </h4>
+                  </div>
+
+                  
+
+                    <div className="space-y-3">
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
                     <span className="inline-block self-start px-2.5 py-0.5 text-[10px] font-mono rounded backdrop-blur-md bg-white/40 dark:bg-white/5 text-hotpink border border-white/50 dark:border-white/10">
                       {item.period}
@@ -65,18 +78,6 @@ export default function WorkExperience({ isDark }) {
                       {item.location}
                     </span>
                   </div>
-
-                  <div className="flex items-center gap-2">
-                    <Briefcase size={16} className="text-hotpink" />
-                    <h4 className={`text-base sm:text-lg font-display font-semibold tracking-tight ${isDark ? 'text-white' : 'text-gray-800'}`}>
-                      {item.title}
-                    </h4>
-                  </div>
-
-                  <p className="text-xs sm:text-sm font-sans font-semibold text-hotpink leading-none">
-                    {item.organization}
-                  </p>
-
                   <p className={`text-xs sm:text-sm leading-relaxed ${isDark ? 'text-gray-300' : 'text-gray-500'}`}>
                     {item.description}
                   </p>

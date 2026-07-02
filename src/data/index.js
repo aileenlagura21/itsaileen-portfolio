@@ -635,11 +635,12 @@ export const SKILLS = [
 export const TIMELINE = [
   {
     id: 'exp-sagility-ojt',
-    year: '2026',
-    period: 'May 18, 2026 - July 2026',
+   
     title: 'Student IT Intern (OJT)',
-    organization: 'Sagility (IT Department)',
-    location: 'Sagility, Tagbilaran, Bohol',
+    organization: 'SAGILITY (IT Department)',
+    location: 'Tagbilaran, Bohol',
+     year: '2026',
+    period: 'May 18, 2026 - July 2026',
     description: 'Successfully completed On-the-Job Training (OJT) within the enterprise IT Department under real-world help desk, system configuration, hardware troubleshooting, division asset inventorying, and network routing configurations.',
     tags: [
       'IT Support Services',
