@@ -14,6 +14,7 @@ export default function WorkExperience({ isDark }) {
 
   // State to track currently active/open accordion category for details
   const [activeAccordion, setActiveAccordion] = useState(0);
+  const [showAllDetails, setShowAllDetails] = useState(false);
 
   return (
     <section
@@ -91,6 +92,12 @@ export default function WorkExperience({ isDark }) {
                       <div className="space-y-2">
                         {item.details.map((section, secIdx) => {
                           const isOpen = activeAccordion === secIdx;
+
+                          // Show only first 2 items initially, or all if expanded
+                          const shouldShow = secIdx < 2 || showAllDetails;
+
+                          if (!shouldShow) return null;
+
                           return (
                             <div
                               key={section.title}
@@ -139,6 +146,26 @@ export default function WorkExperience({ isDark }) {
                           );
                         })}
                       </div>
+
+                      {/* Show More/Show Less Button */}
+                      {item.details.length > 2 && (
+                        <button
+                          onClick={() => setShowAllDetails(!showAllDetails)}
+                          className="w-full flex items-center justify-center gap-2 py-2 px-4 text-xs font-mono font-semibold text-hotpink hover:text-pink-400 transition-colors border border-hotpink/30 hover:border-hotpink/60 rounded-xl backdrop-blur-sm bg-white/5 dark:bg-white/5"
+                        >
+                          {showAllDetails ? (
+                            <>
+                              <ChevronUp size={14} />
+                              Show Less
+                            </>
+                          ) : (
+                            <>
+                              <ChevronDown size={14} />
+                              Show More ({item.details.length - 2} more)
+                            </>
+                          )}
+                        </button>
+                      )}
 
                       {/* Skills Acquired & Conclusion card inside OJT timeline item */}
                       <div className={`p-4 sm:p-5 rounded-[24px] border backdrop-blur-md mt-6 space-y-4 ${

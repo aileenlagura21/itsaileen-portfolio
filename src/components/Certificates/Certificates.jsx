@@ -11,8 +11,10 @@ import zionlabSession3Image from '../../assets/images/zionlab_session3.png';
 import zionlabSession2Image from '../../assets/images/zionlab_session2.png';
 import zionlabSession1Image from '../../assets/images/zionlab_session1.png';
 import bisuProgrammingChallengeImage from '../../assets/images/bisu_programming_challenge.png';
-import codechumCppAlgorithmsImage from '../../assets/images/codechum_cpp_algorithms.jpg';
-import codechumInfoManagementImage from '../../assets/images/codechum_info_management.jpg';
+import codechumCppAlgorithmsImage from '../../assets/images/codechum_cpp_algorithms.png';
+import codechumInfoManagementImage from '../../assets/images/codechum_info_management.png';
+import codechumInfoBasicWebManagementImage from '../../assets/images/basic web development.png';
+
 
 function CertCardTitle({ title, isDark }) {
   return (
@@ -79,15 +81,15 @@ const CERTIFICATES = [
     description: 'Participated in Session 1 of the webinar series "THINK BEFORE YOU BUILD: AI Assists. Humans Still Decide." Explored common challenges in thesis and capstone development and strategies for overcoming them.'
   },
   {
-    id: 'cert-bisu-programming-challenge',
-    title: 'Weekly Programming Challenge - Rank 4 (Week 2)',
-    issuer: 'Bohol Island State University - Bilar Campus Computing Society',
-    date: '2026',
-    credentialId: 'BISU-COMSOC-WPC-W2',
-    verifyUrl: '#',
-    skills: ['Programming', 'Problem Solving', 'Algorithm Implementation', 'Coding Competition', 'Software Development'],
-    image: bisuProgrammingChallengeImage,
-    description: 'Achieved Rank 4 in Week 2 of the Weekly Programming Challenge organized by BISU-Bilar Campus Computing Society, demonstrating strong programming and problem-solving skills.'
+    id: 'cert-basic-web-dev',
+    title: 'Basic Web Development',
+    issuer: 'CodeChum Learning Platform',
+    date: 'July 6, 2026',
+    credentialId: '29451',
+    verifyUrl: 'https://app.codechum.com/certificates/29451',
+    skills: ['HTML', 'CSS', 'JavaScript', 'Responsive Design', 'Web Fundamentals'],
+    image: codechumInfoBasicWebManagementImage,
+    description: 'Successfully completed the Basic Web Development course (BSCS-3-CS-323-T-2-S-Y-25-26) with a total score of 1600/1750. Demonstrated proficiency in web development fundamentals including HTML, CSS, and JavaScript.'
   },
   {
     id: 'cert-cpp-algorithms',
@@ -110,7 +112,18 @@ const CERTIFICATES = [
     skills: ['Information Systems', 'Data Management', 'Database Design', 'Information Architecture', 'Systems Analysis'],
     image: codechumInfoManagementImage,
     description: 'Achieved excellence in Information Management with an outstanding score of 1106/1130. Mastered principles of information systems, data organization, and management strategies.'
-  }
+  },
+  {
+    id: 'cert-bisu-programming-challenge',
+    title: 'Weekly Programming Challenge - Rank 4 (Week 2)',
+    issuer: 'Bohol Island State University - Bilar Campus Computing Society',
+    date: 'March 31, 2025',
+    credentialId: 'BISU-COMSOC-WPC-W2',
+    verifyUrl: '#',
+    skills: ['Programming', 'Problem Solving', 'Algorithm Implementation', 'Coding Competition', 'Software Development'],
+    image: bisuProgrammingChallengeImage,
+    description: 'Achieved Rank 4 in Week 2 of the Weekly Programming Challenge organized by BISU-Bilar Campus Computing Society, demonstrating strong programming and problem-solving skills.'
+  },
 ];
 
 
